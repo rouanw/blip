@@ -1,5 +1,7 @@
 # Blip
 
+[![Build Status](https://travis-ci.org/rouanw/blip.svg?branch=master)](https://travis-ci.org/rouanw/blip)
+
 ## Tasks
 
 - Run unit tests - `npm test`
