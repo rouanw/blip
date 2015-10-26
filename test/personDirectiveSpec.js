@@ -6,7 +6,7 @@ describe('Person directive', function() {
   beforeEach(module('blipApp'));
   beforeEach(module('scripts/person.html'));
 
-  beforeEach(inject(function(_$compile_, _$rootScope_, Person, $httpBackend){
+  beforeEach(inject(function(_$compile_, _$rootScope_, Person){
     $compile = _$compile_;
     $rootScope = _$rootScope_;
     person = Person;
