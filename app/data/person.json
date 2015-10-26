@@ -1,3 +1,11 @@
 {
-  "name" : "Ada Lovelace"
+  "name" : "Ada Lovelace",
+  "assessments": [
+    {
+      "category": "Photography"
+    },
+    {
+      "category": "Cricket"
+    }
+  ]
 }

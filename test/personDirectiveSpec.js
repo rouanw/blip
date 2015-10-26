@@ -13,6 +13,13 @@ describe('Person directive', function() {
   }));
 
   it('should get person details', function() {
+    spyOn(person, 'get').and.returnValue('a person');
+    var element = $compile('<person></person>')($rootScope);
+    $rootScope.$digest();
+    expect($rootScope.person).toBe('a person');
+  });
+
+  it("should display person's name", function() {
     spyOn(person, 'get').and.returnValue({
       name: 'Marie Curie'
     });
@@ -21,10 +28,21 @@ describe('Person directive', function() {
     expect(element.find('h2').text()).toBe('Marie Curie');
   });
 
-  it("should display person's name", function() {
-    spyOn(person, 'get').and.returnValue('a person');
+  it("should display the category name of each assessment a person has", function() {
+    spyOn(person, 'get').and.returnValue({
+      "name" : "Ada Lovelace",
+      "assessments": [
+        {
+          "category": "Photography"
+        },
+        {
+          "category": "Cricket"
+        }
+      ]
+    });
     var element = $compile('<person></person>')($rootScope);
     $rootScope.$digest();
-    expect($rootScope.person).toBe('a person');
+    expect(element.find('h3').eq(0).text()).toBe('Photography');
+    expect(element.find('h3').eq(1).text()).toBe('Cricket');
   });
 });
