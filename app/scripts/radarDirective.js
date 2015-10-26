@@ -12,7 +12,13 @@ angular.module('blipApp')
         var latestRating = scope.assessment.ratings[latestRatingIndex];
 
         var dataset = {
-          data: _.values(latestRating)
+          data: _.values(latestRating),
+          fillColor: 'rgba(151,187,205,0.2)',
+          strokeColor: 'rgba(151,187,205,1)',
+          pointColor: 'rgba(151,187,205,1)',
+          pointStrokeColor: '#fff',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(151,187,205,1)'
         };
 
         var chartContent = {
@@ -20,8 +26,8 @@ angular.module('blipApp')
           datasets: [dataset]
         };
 
-        new Chart(elem[0].getContext('2d'))
-              .Radar(chartContent, {scaleShowLabels: true});
+        var ctx = elem[0].getContext('2d');
+        scope.chart = new Chart(ctx).Radar(chartContent, {scaleShowLabels: true});
       }
     };
   });

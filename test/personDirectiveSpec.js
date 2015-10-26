@@ -3,6 +3,28 @@ describe('Person directive', function() {
       $rootScope,
       person;
 
+  var adaLovelace = {
+      "name" : "Ada Lovelace",
+      "assessments": [
+        {
+          "category": "Photography",
+          "ratings" : [
+            {
+            "Editing": 1
+            }
+          ]
+        },
+        {
+          "category": "Cricket",
+          "ratings" : [
+            {
+              "Bowling": 1
+            }
+          ]
+        }
+      ]
+  };
+
   beforeEach(module('blipApp'));
   beforeEach(module('scripts/person.html'));
 
@@ -12,37 +34,32 @@ describe('Person directive', function() {
     person = Person;
   }));
 
-  it('should get person details', function() {
+  it("should get the person's details", function() {
     spyOn(person, 'get').and.returnValue('a person');
     var element = $compile('<person></person>')($rootScope);
     $rootScope.$digest();
     expect($rootScope.person).toBe('a person');
   });
 
-  it("should display person's name", function() {
-    spyOn(person, 'get').and.returnValue({
-      name: 'Marie Curie'
-    });
+  it("should display the person's name", function() {
+    spyOn(person, 'get').and.returnValue(adaLovelace);
     var element = $compile('<person></person>')($rootScope);
     $rootScope.$digest();
-    expect(element.find('h2').text()).toBe('Marie Curie');
+    expect(element.find('h2').text()).toBe('Ada Lovelace');
   });
 
-  it("should display the category name of each assessment a person has", function() {
-    spyOn(person, 'get').and.returnValue({
-      "name" : "Ada Lovelace",
-      "assessments": [
-        {
-          "category": "Photography"
-        },
-        {
-          "category": "Cricket"
-        }
-      ]
-    });
+  it('should display the category name of each assessment a person has', function() {
+    spyOn(person, 'get').and.returnValue(adaLovelace);
     var element = $compile('<person></person>')($rootScope);
     $rootScope.$digest();
     expect(element.find('h3').eq(0).text()).toBe('Photography');
     expect(element.find('h3').eq(1).text()).toBe('Cricket');
+  });
+
+  it('should include a canvas', function() {
+    spyOn(person, 'get').and.returnValue(adaLovelace);
+    var element = $compile('<person></person>')($rootScope);
+    $rootScope.$digest();
+    expect(element.html()).toContain('<canvas');
   });
 });

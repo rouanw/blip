@@ -2,10 +2,32 @@
   "name" : "Ada Lovelace",
   "assessments": [
     {
-      "category": "Photography"
+      "category": "Photography",
+      "ratings" : [
+        {
+          "Pointing": 1,
+          "Clicking": 1,
+          "Editing": 4,
+          "Framing": 2
+        },
+        {
+          "Pointing": 2,
+          "Clicking": 5,
+          "Editing": 4,
+          "Framing": 3
+        }
+      ]
     },
     {
-      "category": "Cricket"
+      "category": "Cricket",
+      "ratings" : [
+        {
+          "Bowling": 1,
+          "Batting": 1,
+          "Fielding": 4,
+          "Tea drinking": 2
+        }
+      ]
     }
   ]
 }
