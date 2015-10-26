@@ -6,9 +6,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
   </head>
-  <body>
+  <body ng-app="blipApp">
     <div class="container">
-      <div ng-view="">App will go here</div>
+      <div ng-view=""></div>
     </div>
 
     <script src="bower_components/angular/angular.js"></script>
@@ -21,5 +21,8 @@
     <script src="bower_components/chartjs/Chart.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/lodash/lodash.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/person.js"></script>
+    <script src="scripts/personDirective.js"></script>
 </body>
 </html>

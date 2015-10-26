@@ -8,4 +8,10 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch'
-  ]);
+  ])
+  .config(function ($routeProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: 'scripts/view.html'
+      });
+  });
