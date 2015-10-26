@@ -2,14 +2,34 @@
 
 [![Build Status](https://travis-ci.org/rouanw/blip.svg?branch=master)](https://travis-ci.org/rouanw/blip)
 
-## Tasks
+## About Blip
+
+Blip is a tool that helps you track and visualize the things you are busy learning.
+
+## Contributing
+
+Pull requests welcome :)
+
+### Dependencies
+
+- Node
+- Karma CLI - `npm install -g karma-cli`
+- Bower - `npm install -g bower`
+- Electron - `npm install electron-prebuilt -g`
+
+### Before you can start
+
+```
+npm install
+bower install
+```
+
+### Tasks
 
 - Run unit tests - `npm test`
 - Watch files and run tests on changes - `npm run karma`
 - Start app - `npm start`
 
-## Dependencies
+### License
 
-- Node
-- Karma CLI - `npm install -g karma-cli`
-- Electron - `npm install electron-prebuilt -g`
+Blip is open source software and is licensed under the [MIT license](http://opensource.org/licenses/MIT).
