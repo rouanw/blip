@@ -4,6 +4,7 @@
   "description": "track your learning visually",
   "main": "index.js",
   "devDependencies": {
+    "angular-mocks": "^1.4.7",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.14",
     "karma-jasmine": "^0.3.6",
