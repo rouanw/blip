@@ -1,5 +1,6 @@
 describe('Person', function () {
 
+  require = jasmine.createSpy('require');
   __dirname = 'dir';
   JSON = jasmine.createSpyObj('JSON', ['parse']);
 
