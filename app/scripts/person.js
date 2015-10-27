@@ -6,6 +6,10 @@ angular.module('blipApp')
       get: function () {
         var fs = require('fs');
         return JSON.parse(fs.readFileSync(__dirname + '/data/person.json'));
+      },
+      save: function (person) {
+        var fs = require('fs');
+        return fs.writeFileSync(__dirname + '/data/person.json', JSON.stringify(person));
       }
     };
   });
