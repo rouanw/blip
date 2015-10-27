@@ -1,10 +1,15 @@
 describe('Person', function () {
 
   require = jasmine.createSpy('require');
-  __dirname = 'dir';
   JSON = jasmine.createSpyObj('JSON', ['parse', 'stringify']);
+  __dirname = 'dir';
 
-  var person;
+  var person, fs;
+
+  beforeEach(function () {
+    fs = jasmine.createSpyObj('fs', ['readFileSync', 'writeFileSync']);
+    require.and.returnValue(fs);
+  });
 
   beforeEach(module('blipApp'));
 
@@ -16,9 +21,7 @@ describe('Person', function () {
     var expectedObject = {
       someKey: 'someValue'
     };
-    var fs = jasmine.createSpyObj('fs', ['readFileSync']);
     fs.readFileSync.and.returnValue('fileData');
-    require.and.returnValue(fs);
     JSON.parse.and.returnValue(expectedObject);
 
     expect(person.get()).toBe(expectedObject);
@@ -27,8 +30,6 @@ describe('Person', function () {
   });
 
   it('should save person to file on save', function () {
-    var fs = jasmine.createSpyObj('fs', ['writeFileSync']);
-    require.and.returnValue(fs);
     JSON.stringify.and.returnValue('stringified');
 
     person.save('some json object');

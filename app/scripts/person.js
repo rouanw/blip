@@ -2,14 +2,14 @@
 
 angular.module('blipApp')
   .factory('Person', function ($http, $q) {
+    var personFilePath = __dirname + '/data/person.json';
+    var fs = require('fs');
     return {
       get: function () {
-        var fs = require('fs');
-        return JSON.parse(fs.readFileSync(__dirname + '/data/person.json'));
+        return JSON.parse(fs.readFileSync(personFilePath));
       },
       save: function (person) {
-        var fs = require('fs');
-        return fs.writeFileSync(__dirname + '/data/person.json', JSON.stringify(person));
+        return fs.writeFileSync(personFilePath, JSON.stringify(person));
       }
     };
   });
