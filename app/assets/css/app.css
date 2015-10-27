@@ -5,3 +5,7 @@
 .navbar-brand img {
   height: 3em;
 }
+
+.navbar-nav {
+  margin-top: 1em;
+}
