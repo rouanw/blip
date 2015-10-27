@@ -37,4 +37,12 @@ describe('Person', function () {
 
     expect(fs.writeFileSync.calls.argsFor(0)).toEqual(['dir/data/person.json', 'stringified']);
   });
+
+  it('should save person to file in a pretty format', function () {
+    angular.toJson.and.returnValue('stringified');
+
+    person.save('some json object');
+
+    expect(angular.toJson.calls.argsFor(0)).toEqual(['some json object', true]);
+  });
 });
