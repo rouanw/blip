@@ -8,12 +8,39 @@
   </div>
 
   <div ng-repeat="assessment in person.assessments">
+    <hr />
     <div class="form-group">
       <label for="category{{$index}}">Category</label>
-      <input type="text" class="form-control" id="category{{$index}}" placeholder="Category - What topic are you learning about?"
+      <input type="text" class="form-control" id="category{{$index}}"
+        placeholder="Category - What topic are you learning about?"
         ng-model="assessment.category" required="true" ng-trim="true">
+    </div>
+
+    <h4>Your self-assessments</h4>
+    <div class="form-group" ng-repeat="rating in assessment.ratings">
+      <label>Rating number {{$index}}</label>
+      <table>
+        <thead>
+        <tr>
+          <td>Skill</td>
+          <td>Rating</td>
+        </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="(key, value) in rating">
+            <td>
+              <p class="form-control-static">{{key}}</p>
+            </td>
+            <td>
+              <input type="number" class="form-control"
+                placeholder="1-5" ng-model="rating[key]"
+                min="1" max="5">
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <button ng-click="save(person)" class="btn btn-default">Save</button>
+  <button ng-click="save(person)" class="btn btn-primary">Save</button>
 </form>
