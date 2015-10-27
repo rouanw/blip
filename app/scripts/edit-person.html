@@ -1,9 +1,18 @@
+<h2>Capture your progress</h2>
 
 <form>
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" class="form-control" id="name" placeholder="Name"
       ng-model="person.name" required="true" ng-trim="true">
+  </div>
+
+  <div ng-repeat="assessment in person.assessments">
+    <div class="form-group">
+      <label for="category{{$index}}">Category</label>
+      <input type="text" class="form-control" id="category{{$index}}" placeholder="Category - What topic are you learning about?"
+        ng-model="assessment.category" required="true" ng-trim="true">
+    </div>
   </div>
 
   <button ng-click="save(person)" class="btn btn-default">Save</button>
