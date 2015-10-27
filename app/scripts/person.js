@@ -9,7 +9,7 @@ angular.module('blipApp')
         return JSON.parse(fs.readFileSync(personFilePath));
       },
       save: function (person) {
-        return fs.writeFileSync(personFilePath, JSON.stringify(person));
+        return fs.writeFileSync(personFilePath, angular.toJson(person));
       }
     };
   });

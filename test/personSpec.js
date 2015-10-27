@@ -1,7 +1,8 @@
 describe('Person', function () {
 
   require = jasmine.createSpy('require');
-  JSON = jasmine.createSpyObj('JSON', ['parse', 'stringify']);
+  JSON = jasmine.createSpyObj('JSON', ['parse']);
+  angular = jasmine.createSpyObj('angular', ['toJson']);
   __dirname = 'dir';
 
   var person, fs;
@@ -30,7 +31,7 @@ describe('Person', function () {
   });
 
   it('should save person to file on save', function () {
-    JSON.stringify.and.returnValue('stringified');
+    angular.toJson.and.returnValue('stringified');
 
     person.save('some json object');
 
