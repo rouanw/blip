@@ -9,10 +9,19 @@
     <link rel="stylesheet" href="assets/css/app.css">
   </head>
   <body ng-app="blipApp">
-    <div class="navbar navbar-default" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand"><img src="assets/images/blip_logo.png"/></a>
+    <div class="header">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand"><img src="assets/images/blip_logo.png"/></a>
+          </div>
+
+          <div>
+            <ul class="nav navbar-nav">
+              <li><a href="#/">Visualise</a></li>
+              <li><a ng-href="#/edit">Edit</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -46,5 +55,6 @@
     <script src="scripts/person.js"></script>
     <script src="scripts/personDirective.js"></script>
     <script src="scripts/radarDirective.js"></script>
+    <script src="scripts/editPersonDirective.js"></script>
 </body>
 </html>

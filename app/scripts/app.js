@@ -13,5 +13,8 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: 'scripts/view.html'
+      })
+      .when('/edit', {
+        templateUrl: 'scripts/edit.html'
       });
   });
