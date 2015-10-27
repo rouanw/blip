@@ -1,26 +1,33 @@
 {
-  "name" : "Ada Lovelace",
+  "name": "Ada Lovelace",
   "assessments": [
     {
       "category": "Photography",
-      "ratings" : [
+      "ratings": [
         {
           "Pointing": 1,
           "Clicking": 1,
-          "Editing": 4,
-          "Framing": 2
+          "Editing": 1,
+          "Framing": 1,
+          "Boxing": 1
         },
         {
           "Pointing": 2,
           "Clicking": 5,
           "Editing": 4,
-          "Framing": 3
+          "Framing": 3,
+          "Fencing": 3
+        },
+        {
+          "sadsaf": 1,
+          "fsd": 1,
+          "fdfff": 1
         }
       ]
     },
     {
       "category": "Cricket",
-      "ratings" : [
+      "ratings": [
         {
           "Bowling": 1,
           "Batting": 1,

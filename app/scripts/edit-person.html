@@ -37,9 +37,24 @@
                 min="1" max="5">
             </td>
           </tr>
+            <td>
+              <input type="text" class="form-control"
+                placeholder="New skill" ng-model="newRatingKey">
+            </td>
+            <td>
+              <input type="number" class="form-control"
+                placeholder="1-5" ng-model="newRatingValue"
+                min="1" max="5">
+            </td>
+            <td>
+              <button ng-click="addSkill(rating, newRatingKey, newRatingValue)">Add</button>
+            </td>
+          <tr>
+          </tr>
         </tbody>
       </table>
     </div>
+    <button ng-click="addRating(assessment)">Add today's self-assessment</button>
   </div>
 
   <button ng-click="save(person)" class="btn btn-primary">Save</button>

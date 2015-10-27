@@ -10,6 +10,12 @@ angular.module('blipApp')
         $scope.save = function (person) {
           Person.save(person);
         };
+        $scope.addRating = function (assessment) {
+          assessment.ratings.push({});
+        };
+        $scope.addSkill = function (ratings, newRatingKey, newRatingValue) {
+          ratings[newRatingKey] = newRatingValue;
+        };
       }
     };
   });

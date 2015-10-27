@@ -48,7 +48,37 @@ describe('Person directive', function() {
     $rootScope.$digest();
 
     $rootScope.save('william faulkner');
-    
+
     expect(person.save.calls.argsFor(0)[0]).toBe('william faulkner');
+  });
+
+  describe('add rating', function () {
+
+    beforeEach(function () {
+      spyOn(person, 'get').and.returnValue(adaLovelace);
+      $compile('<edit-person></edit-person>')($rootScope);
+      $rootScope.$digest();
+    });
+
+    it('should add a new rating to the existing assessment', function () {
+      $rootScope.addRating(adaLovelace.assessments[0]);
+      var ratings = $rootScope.person.assessments[0].ratings;
+      expect(ratings[ratings.length - 1]).toEqual({});
+    });
+  });
+
+  describe('add skill', function () {
+
+    beforeEach(function () {
+      spyOn(person, 'get').and.returnValue(adaLovelace);
+      $compile('<edit-person></edit-person>')($rootScope);
+      $rootScope.$digest();
+    });
+
+    it('should add a new skill to the existing rating', function () {
+      $rootScope.addSkill(adaLovelace.assessments[0].ratings[0], 'jumping', 99);
+      var rating = $rootScope.person.assessments[0].ratings[0];
+      expect(rating.jumping).toBe(99);
+    });
   });
 });
