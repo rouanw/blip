@@ -15,7 +15,8 @@ Pull requests welcome :)
 - Node
 - Karma CLI - `npm install -g karma-cli`
 - Bower - `npm install -g bower`
-- Electron - `npm install electron-prebuilt -g`
+- Electron - `npm install -g electron-prebuilt`
+- Electron packager - `npm install -g electron-packager`
 
 ### Before you can start
 

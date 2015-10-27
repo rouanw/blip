@@ -10,12 +10,16 @@
     "karma-jasmine": "^0.3.6",
     "karma-ng-html2js-preprocessor": "^0.2.0",
     "karma-phantomjs-launcher": "^0.2.1",
-    "phantomjs": "^1.9.18"
+    "phantomjs": "^1.9.18",
+    "rimraf": "^2.4.3"
   },
   "scripts": {
     "test": "karma start --singleRun",
     "karma": "karma start",
-    "start": "electron app"
+    "start": "electron app",
+    "clean": "rimraf release",
+    "prepackage": "npm run clean",
+    "package": "electron-packager . Blip --all=true --version=0.31.2 --out=release --ignore=node_modules"
   },
   "license": "MIT"
 }
