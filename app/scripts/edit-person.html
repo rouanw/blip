@@ -1,6 +1,6 @@
 <h2>Capture your progress</h2>
 
-<form>
+<form name="edit-person">
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" class="form-control" id="name" placeholder="Name"
@@ -9,14 +9,15 @@
 
   <div ng-repeat="assessment in person.assessments">
     <hr />
+
+    <h4>Your {{assessment.category}} Ratings</h4>
     <div class="form-group">
-      <label for="category{{$index}}">Category</label>
+      <label for="category{{$index}}">Category name</label>
       <input type="text" class="form-control" id="category{{$index}}"
         placeholder="Category - What topic are you learning about?"
         ng-model="assessment.category" required="true" ng-trim="true">
     </div>
 
-    <h4>Your self-assessments</h4>
     <div class="form-group" ng-repeat="rating in assessment.ratings">
       <label>Rating number {{$index}}</label>
       <table>
@@ -47,15 +48,17 @@
                 min="1" max="5">
             </td>
             <td>
-              <button ng-click="addSkill(rating, newRatingKey, newRatingValue)">Add</button>
+              <button ng-click="addSkill(rating, newRatingKey, newRatingValue)" class="btn btn-default">Add skill</button>
             </td>
           <tr>
           </tr>
         </tbody>
       </table>
     </div>
-    <button ng-click="addRating(assessment)">Add today's self-assessment</button>
+    <button ng-click="addRating(assessment)" class="btn btn-primary">Rate where you are today</button>
   </div>
 
-  <button ng-click="save(person)" class="btn btn-primary">Save</button>
+  <p class="save-all well">
+    <button ng-click="save(person)" class="btn btn-success">Save all</button>
+  </p>
 </form>

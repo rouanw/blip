@@ -9,3 +9,31 @@
 .navbar-nav {
   margin-top: 1em;
 }
+
+input[type=number] {
+  min-width: 5em;
+}
+
+.save-all {
+  position: fixed;
+  bottom: 0px;
+  width: 95%;
+}
+
+form[name=edit-person] {
+  margin-bottom: 8em;
+}
+
+thead {
+  font-weight: bold;
+  color: #A9A9A9;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0.2em 0.2em;
+}
+
+h2, h4 {
+  color: #169CFF;
+}
