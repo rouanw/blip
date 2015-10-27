@@ -8,7 +8,26 @@
     <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css">
   </head>
   <body ng-app="blipApp">
+    <div class="navbar navbar-default" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <a class="navbar-brand">Blip</a>
+            </div>
+          </div>
+        </div>
+
     <div class="container">
+      <span class="label label-info">1</span>
+      <span class="label label-primary">Never heard of it</span>
+      <span class="label label-info">2</span>
+      <span class="label label-primary">Can identify it when I see it</span>
+      <span class="label label-info">3</span>
+      <span class="label label-primary">Can make a new one</span>
+      <span class="label label-info">4</span>
+      <span class="label label-primary">Can re-organise and improve</span>
+      <span class="label label-info">5</span>
+      <span class="label label-primary">Can teach others</span>
+      <hr />
       <div ng-view=""></div>
     </div>
 
