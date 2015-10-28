@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('blipApp')
-  .directive('editPerson', function (Person) {
+  .directive('editPerson', function (Person, $window) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/edit-person.html',
@@ -26,6 +26,9 @@ angular.module('blipApp')
             person.assessments = [];
           }
           person.assessments.push({});
+        };
+        $scope.discardChanges = function () {
+          $window.location.reload();
         };
       }
     };

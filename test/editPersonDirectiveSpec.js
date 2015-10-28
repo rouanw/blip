@@ -27,6 +27,7 @@ describe('Person directive', function() {
 
   beforeEach(module('blipApp'));
   beforeEach(module('scripts/edit-person.html'));
+  beforeEach(module('scripts/view.html'));
 
   beforeEach(inject(function(_$compile_, _$rootScope_, Person){
     $compile = _$compile_;
@@ -115,5 +116,19 @@ describe('Person directive', function() {
       $rootScope.addAssessment(person);
       expect(person.assessments.length).toBe(1);
     });
+  });
+
+  describe('discard changes', function () {
+    beforeEach(function () {
+      spyOn(person, 'get').and.returnValue(adaLovelace);
+      $compile('<edit-person></edit-person>')($rootScope);
+      $rootScope.$digest();
+    });
+
+    it('should reload the page', inject(function ($window) {
+      spyOn($window.location, 'reload');
+      $rootScope.discardChanges();
+      expect($window.location.reload).toHaveBeenCalled();
+    }));
   });
 });
