@@ -6,10 +6,7 @@
     <input type="text" class="form-control" id="name" placeholder="Name"
       ng-model="person.name" required="true" ng-trim="true">
   </div>
-
-  <div ng-repeat="assessment in person.assessments">
-    <hr />
-
+  <div ng-repeat="assessment in person.assessments" class="well">
     <h4>Your {{assessment.category}} Ratings</h4>
     <div class="form-group">
       <label for="category{{$index}}">Category name</label>
@@ -17,8 +14,15 @@
         placeholder="Category - What are you learning about?"
         ng-model="assessment.category" required="true" ng-trim="true">
     </div>
-
-    <div class="form-group" ng-repeat="rating in assessment.ratings">
+    <div class="form-group">
+      <a href="javascript:void(0)"
+          ng-click="showOlderRatings = !showOlderRatings"
+          ng-show="assessment.ratings.length > 1">
+        {{showOlderRatings ? '- Hide': '+ Show'}} older ratings
+      </a>
+    </div>
+    <div class="form-group" ng-repeat="rating in assessment.ratings"
+      ng-show="$index === assessment.ratings.length - 1 || showOlderRatings">
       <label>Rating number {{$index}}</label>
       <table>
         <thead>
@@ -61,7 +65,7 @@
   </div>
 
   <div class="form-group">
-    <button ng-click="addAssessment(person)" class="btn btn-default">Add a new category of skills to track</button>
+    <button ng-click="addAssessment(person)" class="btn btn-info">Add a new category of skills to track</button>
   </div>
 
   <p class="save-all well">
