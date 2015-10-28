@@ -40,15 +40,15 @@
           </tr>
             <td>
               <input type="text" class="form-control"
-                placeholder="New skill" ng-model="newRatingKey">
+                placeholder="New skill" ng-model="newRating.key">
             </td>
             <td>
               <input type="number" class="form-control"
-                placeholder="1-5" ng-model="newRatingValue"
+                placeholder="1-5" ng-model="newRating.value"
                 min="1" max="5">
             </td>
             <td>
-              <button ng-click="addSkill(rating, newRatingKey, newRatingValue)" class="btn btn-default">Add skill</button>
+              <button ng-click="addSkill(rating, newRating)" class="btn btn-default">Add skill</button>
             </td>
           <tr>
           </tr>

@@ -16,8 +16,10 @@ angular.module('blipApp')
           }
           assessment.ratings.push({});
         };
-        $scope.addSkill = function (ratings, newRatingKey, newRatingValue) {
-          ratings[newRatingKey] = newRatingValue;
+        $scope.addSkill = function (ratings, newRating) {
+          ratings[newRating.key] = newRating.value;
+          newRating.key = undefined;
+          newRating.value = undefined;
         };
         $scope.addAssessment = function (person) {
           if (!person.assessments) {

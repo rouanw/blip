@@ -82,9 +82,17 @@ describe('Person directive', function() {
     });
 
     it('should add a new skill to the existing rating', function () {
-      $rootScope.addSkill(adaLovelace.assessments[0].ratings[0], 'jumping', 99);
+      var newRating = { key: 'jumping', value: 99 };
+      $rootScope.addSkill(adaLovelace.assessments[0].ratings[0], newRating);
       var rating = $rootScope.person.assessments[0].ratings[0];
       expect(rating.jumping).toBe(99);
+    });
+
+    it('should reset new rating after adding', function () {
+      var newRating = { key: 'jumping', value: 99 };
+      $rootScope.addSkill(adaLovelace.assessments[0].ratings[0], newRating);
+      expect(newRating.key).toBeUndefined();
+      expect(newRating.value).toBeUndefined();
     });
   });
 
