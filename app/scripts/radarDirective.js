@@ -9,7 +9,7 @@ angular.module('blipApp')
       },
       link: function (scope, elem) {
         var latestRatingIndex = scope.assessment.ratings.length - 1;
-        var latestRating = scope.assessment.ratings[latestRatingIndex];
+        var latestRating = scope.assessment.ratings[latestRatingIndex].scores;
 
         var dataset = {
           data: _.values(latestRating),

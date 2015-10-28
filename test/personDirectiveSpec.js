@@ -10,7 +10,7 @@ describe('Person directive', function() {
           "category": "Photography",
           "ratings" : [
             {
-            "Editing": 1
+              scores: { "Editing": 1 }
             }
           ]
         },
@@ -18,7 +18,7 @@ describe('Person directive', function() {
           "category": "Cricket",
           "ratings" : [
             {
-              "Bowling": 1
+              scores: { "Bowling": 1 }
             }
           ]
         }
@@ -73,9 +73,11 @@ describe('Person directive', function() {
       var assessment = {
         ratings: [
           {
-            "skill1": 3,
-            "skill2": 3,
-            "skill3": 3
+            "scores": {
+              "skill1": 3,
+              "skill2": 3,
+              "skill3": 3
+            }
           }
         ]
       };
@@ -84,13 +86,15 @@ describe('Person directive', function() {
 
     it("should return false if assessment's most recent rating has fewer than 3 skills", function() {
       var assessment = {
-        ratings: [
-          {
-            "skill1": 3,
-            "skill2": 3
+      ratings: [
+        {
+          "scores": {
+            "skill2": 3,
+            "skill3": 3
           }
-        ]
-      };
+        }
+      ]
+    };
       expect($rootScope.hasEnoughSkillsForRadar(assessment)).toBeFalsy();
     });
   });

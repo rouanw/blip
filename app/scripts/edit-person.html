@@ -32,13 +32,13 @@
         </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="(key, value) in rating">
+          <tr ng-repeat="(key, value) in rating.scores">
             <td>
               <p class="form-control-static">{{key}}</p>
             </td>
             <td>
               <input type="number" class="form-control"
-                placeholder="1-5" ng-model="rating[key]"
+                placeholder="1-5" ng-model="rating.scores[key]"
                 min="1" max="5">
             </td>
           </tr>
@@ -52,7 +52,7 @@
                 min="1" max="5">
             </td>
             <td>
-              <button ng-click="addSkill(rating, newRating)" class="btn btn-default">Add skill</button>
+              <button ng-click="addSkill(rating.scores, newRating)" class="btn btn-default">Add skill</button>
             </td>
           <tr>
           </tr>

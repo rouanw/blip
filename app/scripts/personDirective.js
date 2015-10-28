@@ -8,8 +8,8 @@ angular.module('blipApp')
       controller: function ($scope) {
         $scope.person = Person.get();
         $scope.hasEnoughSkillsForRadar = function (assessment) {
-          var mostRecentRating = assessment.ratings[assessment.ratings.length - 1];
-          return Object.keys(mostRecentRating).length > 2;
+          var mostRecentScores = assessment.ratings[assessment.ratings.length - 1].scores;
+          return Object.keys(mostRecentScores).length > 2;
         }
       }
     };

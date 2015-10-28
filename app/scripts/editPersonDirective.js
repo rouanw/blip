@@ -14,7 +14,9 @@ angular.module('blipApp')
           if (!assessment.ratings) {
             assessment.ratings = [];
           }
-          assessment.ratings.push({});
+          assessment.ratings.push({
+            scores: {}
+          });
         };
         $scope.addSkill = function (ratings, newRating) {
           ratings[newRating.key] = newRating.value;

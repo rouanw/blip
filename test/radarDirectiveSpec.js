@@ -15,16 +15,20 @@ describe('Radar chart directive', function() {
     $rootScope.assessment = {
       'ratings' : [
         {
-          'Grunt': 1,
-          'Node': 1,
-          'Angular': 4,
-          'CSS': 2
+          scores: {
+            'Grunt': 1,
+            'Node': 1,
+            'Angular': 4,
+            'CSS': 2
+          },
         },
         {
-          'Grunt': 5,
-          'Node': 1,
-          'Angular': 5,
-          'CSS': 3
+          scores: {
+            'Grunt': 5,
+            'Node': 1,
+            'Angular': 5,
+            'CSS': 3
+          }
         }
       ]
     };
