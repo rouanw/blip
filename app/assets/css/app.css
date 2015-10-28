@@ -37,3 +37,8 @@ table {
 h2, h4 {
   color: #169CFF;
 }
+
+.radar-block {
+  width: 350px;
+  height: 350px;
+}

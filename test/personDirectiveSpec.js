@@ -62,4 +62,36 @@ describe('Person directive', function() {
     $rootScope.$digest();
     expect(element.html()).toContain('<canvas');
   });
+
+  describe('hasEnoughSkillsForRadar', function () {
+    beforeEach(function () {
+      var element = $compile('<person></person>')($rootScope);
+      $rootScope.$digest();
+    });
+
+    it("should return true if assessment's most recent rating has more than 2 skills", function() {
+      var assessment = {
+        ratings: [
+          {
+            "skill1": 3,
+            "skill2": 3,
+            "skill3": 3
+          }
+        ]
+      };
+      expect($rootScope.hasEnoughSkillsForRadar(assessment)).toBeTruthy();
+    });
+
+    it("should return false if assessment's most recent rating has fewer than 3 skills", function() {
+      var assessment = {
+        ratings: [
+          {
+            "skill1": 3,
+            "skill2": 3
+          }
+        ]
+      };
+      expect($rootScope.hasEnoughSkillsForRadar(assessment)).toBeFalsy();
+    });
+  });
 });
