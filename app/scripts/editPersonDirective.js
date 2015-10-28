@@ -15,6 +15,7 @@ angular.module('blipApp')
             assessment.ratings = [];
           }
           assessment.ratings.push({
+            ratedAt: moment().format(),
             scores: {}
           });
         };

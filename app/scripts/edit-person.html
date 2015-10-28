@@ -23,7 +23,7 @@
     </div>
     <div class="form-group" ng-repeat="rating in assessment.ratings"
       ng-show="$index === assessment.ratings.length - 1 || showOlderRatings">
-      <label>Rating number {{$index}}</label>
+      <label>Rating from {{rating.ratedAt}}</label>
       <table>
         <thead>
         <tr>

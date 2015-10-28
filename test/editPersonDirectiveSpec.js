@@ -61,10 +61,13 @@ describe('Person directive', function() {
       $rootScope.$digest();
     });
 
-    it('should add a new rating to the existing assessment', function () {
+    it('should add a new rating with a date to the existing assessment', function () {
+      var momentSpy = jasmine.createSpyObj('moment', ['format']);
+      spyOn(window, 'moment').and.returnValue(momentSpy);
+      momentSpy.format.and.returnValue('somedate');
       $rootScope.addRating(adaLovelace.assessments[0]);
       var ratings = $rootScope.person.assessments[0].ratings;
-      expect(ratings[ratings.length - 1]).toEqual({scores: {}});
+      expect(ratings[ratings.length - 1]).toEqual({scores: {}, ratedAt: 'somedate'});
     });
 
     it('should initialise a new array if the assessment has no ratings yet', function () {
