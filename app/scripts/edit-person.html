@@ -14,7 +14,7 @@
     <div class="form-group">
       <label for="category{{$index}}">Category name</label>
       <input type="text" class="form-control" id="category{{$index}}"
-        placeholder="Category - What topic are you learning about?"
+        placeholder="Category - What are you learning about?"
         ng-model="assessment.category" required="true" ng-trim="true">
     </div>
 
@@ -55,7 +55,13 @@
         </tbody>
       </table>
     </div>
-    <button ng-click="addRating(assessment)" class="btn btn-primary">Rate where you are today</button>
+    <div class="form-group">
+      <button ng-click="addRating(assessment)" class="btn btn-primary">Rate where you are today</button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button ng-click="addAssessment(person)" class="btn btn-default">Add a new category of skills to track</button>
   </div>
 
   <p class="save-all well">

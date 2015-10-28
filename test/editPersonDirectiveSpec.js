@@ -65,6 +65,13 @@ describe('Person directive', function() {
       var ratings = $rootScope.person.assessments[0].ratings;
       expect(ratings[ratings.length - 1]).toEqual({});
     });
+
+    it('should initialise a new array if the assessment has no ratings yet', function () {
+      var assessment = {};
+      $rootScope.addRating(assessment);
+      expect(assessment.ratings.length).toBe(1);
+      expect(assessment.ratings[assessment.ratings.length - 1]).toEqual({});
+    });
   });
 
   describe('add skill', function () {
@@ -79,6 +86,21 @@ describe('Person directive', function() {
       $rootScope.addSkill(adaLovelace.assessments[0].ratings[0], 'jumping', 99);
       var rating = $rootScope.person.assessments[0].ratings[0];
       expect(rating.jumping).toBe(99);
+    });
+  });
+
+  describe('add assessment category', function () {
+
+    beforeEach(function () {
+      spyOn(person, 'get').and.returnValue(adaLovelace);
+      $compile('<edit-person></edit-person>')($rootScope);
+      $rootScope.$digest();
+    });
+
+    it('should add a new assessment to the existing person', function () {
+      $rootScope.addAssessment(adaLovelace);
+      var assessments = $rootScope.person.assessments;
+      expect(assessments[assessments.length - 1]).toEqual({});
     });
   });
 });

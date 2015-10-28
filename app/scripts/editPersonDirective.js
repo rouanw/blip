@@ -11,10 +11,16 @@ angular.module('blipApp')
           Person.save(person);
         };
         $scope.addRating = function (assessment) {
+          if (!assessment.ratings) {
+            assessment.ratings = [];
+          }
           assessment.ratings.push({});
         };
         $scope.addSkill = function (ratings, newRatingKey, newRatingValue) {
           ratings[newRatingKey] = newRatingValue;
+        };
+        $scope.addAssessment = function (person) {
+          person.assessments.push({});
         };
       }
     };

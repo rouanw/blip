@@ -1,9 +1,9 @@
 {
-  "name" : "Ada Lovelace",
+  "name": "Ada Lovelace",
   "assessments": [
     {
       "category": "Photography",
-      "ratings" : [
+      "ratings": [
         {
           "Pointing": 1,
           "Clicking": 1,
@@ -20,12 +20,21 @@
     },
     {
       "category": "Cricket",
-      "ratings" : [
+      "ratings": [
         {
           "Bowling": 1,
           "Batting": 1,
           "Fielding": 4,
           "Tea drinking": 2
+        }
+      ]
+    },
+    {
+      "category": "Scuba Diving",
+      "ratings": [
+        {
+          "Breathing": 2,
+          "Falling into water": 3
         }
       ]
     }
