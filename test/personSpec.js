@@ -30,6 +30,11 @@ describe('Person', function () {
     expect(JSON.parse.calls.argsFor(0)[0]).toBe('fileData');
   });
 
+  it("should return a new person if file doesn't exist", function () {
+    fs.readFileSync.and.throwError('ENOENT');
+    expect(person.get()).toEqual({});
+  });
+
   it('should save person to file on save', function () {
     angular.toJson.and.returnValue('stringified');
 

@@ -20,6 +20,9 @@ angular.module('blipApp')
           ratings[newRatingKey] = newRatingValue;
         };
         $scope.addAssessment = function (person) {
+          if (!person.assessments) {
+            person.assessments = [];
+          }
           person.assessments.push({});
         };
       }

@@ -70,7 +70,6 @@ describe('Person directive', function() {
       var assessment = {};
       $rootScope.addRating(assessment);
       expect(assessment.ratings.length).toBe(1);
-      expect(assessment.ratings[assessment.ratings.length - 1]).toEqual({});
     });
   });
 
@@ -101,6 +100,12 @@ describe('Person directive', function() {
       $rootScope.addAssessment(adaLovelace);
       var assessments = $rootScope.person.assessments;
       expect(assessments[assessments.length - 1]).toEqual({});
+    });
+
+    it("should create an assessments array if one doesn't exist", function () {
+      var person = {};
+      $rootScope.addAssessment(person);
+      expect(person.assessments.length).toBe(1);
     });
   });
 });
