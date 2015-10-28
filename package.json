@@ -16,6 +16,7 @@
   "scripts": {
     "test": "karma start --singleRun",
     "karma": "karma start",
+    "prestart": "npm install && bower install",
     "start": "electron app",
     "clean": "rimraf release",
     "prepackage": "npm run clean",
