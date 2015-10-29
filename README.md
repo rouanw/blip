@@ -18,6 +18,7 @@ Pull requests welcome :)
 - Electron - `npm install -g electron-prebuilt`
 - Electron packager - `npm install -g electron-packager`
 - Electron builder - `npm install -g electron-builder`
+- Wine (To package for Windows - see [https://www.npmjs.com/package/electron-builder](https://www.npmjs.com/package/electron-builder))
 
 ### Tasks
 
