@@ -8,17 +8,24 @@ describe('Person directive', function() {
       "assessments": [
         {
           "category": "Photography",
-          "ratings" : [
+          "ratings": [
             {
-            "Editing": 1
+              "scores":
+              {
+                "Editing": 1,
+                "Clicking": 3
+              }
             }
           ]
         },
         {
           "category": "Cricket",
-          "ratings" : [
+          "ratings": [
             {
-              "Bowling": 1
+              "scores":
+              {
+                "Bowling": 1
+              }
             }
           ]
         }
@@ -67,13 +74,26 @@ describe('Person directive', function() {
       momentSpy.format.and.returnValue('somedate');
       $rootScope.addRating(adaLovelace.assessments[0]);
       var ratings = $rootScope.person.assessments[0].ratings;
-      expect(ratings[ratings.length - 1]).toEqual({scores: {}, ratedAt: 'somedate'});
+      expect(ratings[ratings.length - 1]).toEqual(jasmine.objectContaining({ratedAt: 'somedate'}));
     });
 
     it('should initialise a new array if the assessment has no ratings yet', function () {
       var assessment = {};
       $rootScope.addRating(assessment);
       expect(assessment.ratings.length).toBe(1);
+    });
+
+    it("should default to previous rating's skills when available", function () {
+      $rootScope.addRating(adaLovelace.assessments[0]);
+      var previousScores = $rootScope.person.assessments[0].ratings[0].scores;
+      var newScores = $rootScope.person.assessments[0].ratings[1].scores;
+      expect(Object.keys(newScores)).toEqual(Object.keys(previousScores));
+    });
+
+    it("should not default to previous rating's skills when no ratings exist", function () {
+      expect(function () {
+        $rootScope.addRating({});
+      }).not.toThrow();
     });
   });
 

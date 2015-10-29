@@ -14,9 +14,15 @@ angular.module('blipApp')
           if (!assessment.ratings) {
             assessment.ratings = [];
           }
+          var scores = {};
+          if (assessment.ratings.length > 0) {
+            scores = _.mapValues(_.last(assessment.ratings).scores, function () {
+              return undefined;
+            });
+          }
           assessment.ratings.push({
             ratedAt: moment().format(),
-            scores: {}
+            scores: scores
           });
         };
         $scope.addSkill = function (ratings, newRating) {
