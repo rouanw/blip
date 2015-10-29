@@ -3,9 +3,9 @@ body {
 }
 
 .header {
-    margin-top: 2em;
-    padding-bottom: 2em;
-    border-bottom: 2px solid #169CFF;
+  margin-top: 2em;
+  padding-bottom: 2em;
+  border-bottom: 2px solid #169CFF;
 }
 
 .container {
@@ -16,4 +16,15 @@ body {
 
 .caption h4 {
   color: #169CFF;
+}
+
+.screenshot {
+  margin: auto;
+  margin-top: 2em;
+  box-shadow: 1px 1px 2px 1px #DEDEDE;
+  padding: 1em;
+}
+
+.screenshot img {
+  max-width: 60em;
 }
