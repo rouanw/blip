@@ -30,6 +30,9 @@ angular.module('blipApp')
           newRating.key = undefined;
           newRating.value = undefined;
         };
+        $scope.removeSkill = function (scores, scoreToRemove) {
+          delete scores[scoreToRemove];
+        };
         $scope.addAssessment = function (person) {
           if (!person.assessments) {
             person.assessments = [];

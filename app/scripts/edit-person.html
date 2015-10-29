@@ -41,6 +41,9 @@
                 placeholder="1-5" ng-model="rating.scores[key]"
                 min="1" max="5">
             </td>
+            <td>
+              <button ng-click="removeSkill(rating.scores, key)" class="btn btn-default">Remove skill</button>
+            </td>
           </tr>
             <td>
               <input type="text" class="form-control"

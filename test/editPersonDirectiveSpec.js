@@ -120,6 +120,24 @@ describe('Person directive', function() {
     });
   });
 
+  describe('remove skill', function () {
+
+    beforeEach(function () {
+      spyOn(person, 'get').and.returnValue(adaLovelace);
+      $compile('<edit-person></edit-person>')($rootScope);
+      $rootScope.$digest();
+    });
+
+    it('should remove skill from the rating scores', function () {
+      var scores = {
+        "Editing": 1,
+        "Clicking": 3
+      };
+      $rootScope.removeSkill(scores, 'Editing');
+      expect(Object.keys(scores)).not.toContain('Editing');
+    });
+  });
+
   describe('add assessment category', function () {
 
     beforeEach(function () {
