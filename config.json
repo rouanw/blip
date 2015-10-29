@@ -8,5 +8,9 @@
       { "x": 150, "y": 20, "type": "link", "path": "/Applications" },
       { "x": 20, "y": 20, "type": "file" }
     ]
+  },
+  "win" : {
+    "title" : "Blip",
+    "icon" : "app/assets/images/blip_icon.ico"
   }
 }

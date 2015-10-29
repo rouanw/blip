@@ -24,13 +24,16 @@
     "prestart": "npm run prepare",
     "start": "electron app",
     "clean": "rimraf release && rimraf installers",
-    "mac": "electron-packager . Blip --platform=darwin --arch=all --version=0.31.2 --out=release --ignore=node_modules --icon=app/assets/images/blip_icon.icns",
-    "windows": "electron-packager . Blip --platform=win32 --arch=all --version=0.31.2 --out=release --ignore=node_modules",
-    "linux": "electron-packager . Blip --platform=linux --arch=all --version=0.31.2 --out=release --ignore=node_modules",
+    "package_mac": "electron-packager . Blip --platform=darwin --arch=all --version=0.31.2 --out=release --ignore=\"(node_modules|release|installers)\" --icon=app/assets/images/blip_icon.icns",
+    "package_windows": "electron-packager . Blip --platform=win32 --arch=all --version=0.31.2 --out=release --ignore=\"(node_modules|release|installers)\"",
+    "package_linux": "electron-packager . Blip --platform=linux --arch=all --version=0.31.2 --out=release --ignore=\"(node_modules|release|installers)\"",
     "prepackage": "npm run clean && npm run prepare",
-    "package": "npm run mac && npm run windows && npm run linux",
+    "package": "npm run package_mac && npm run package_windows && npm run package_linux",
     "preinstaller": "npm run package",
-    "installer": "electron-builder release/Blip-darwin-x64/Blip.app --platform=osx --out=installers --config=config.json"
+    "installer_mac": "electron-builder release/Blip-darwin-x64/Blip.app --platform=osx --out=installers --config=config.json",
+    "installer_windows": "electron-builder release/Blip-win32-x64/ --platform=win --out=installers --config=config.json",
+    "installer_linux": "echo linux to come",
+    "installer": "npm run installer_mac && npm run installer_windows && npm run installer_linux"
   },
   "license": "MIT"
 }
