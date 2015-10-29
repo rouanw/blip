@@ -21,7 +21,7 @@
     "start": "electron app",
     "clean": "rimraf release && rimraf installers",
     "prepackage": "npm run clean && npm run prepare",
-    "package": "electron-packager . Blip --all=true --version=0.31.2 --out=release --ignore=node_modules",
+    "package": "electron-packager . Blip --platform=darwin --arch=x64 --version=0.31.2 --out=release --ignore=node_modules --icon=app/assets/images/blip_icon.icns",
     "preinstaller": "npm run package",
     "installer": "electron-builder release/Blip-darwin-x64/Blip.app --platform=osx --out=installers --config=config.json"
   },

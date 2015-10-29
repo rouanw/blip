@@ -1,12 +1,12 @@
 {
   "osx" : {
     "title": "Blip",
-    "background": "app/assets/images/blip_logo.png",
-    "icon": "app/blip.icns",
+    "background": "app/assets/images/blip_logo_small.png",
+    "icon": "app/assets/images/blip_icon.icns",
     "icon-size": 80,
     "contents": [
-      { "x": 438, "y": 344, "type": "link", "path": "/Applications" },
-      { "x": 192, "y": 344, "type": "file" }
+      { "x": 150, "y": 20, "type": "link", "path": "/Applications" },
+      { "x": 20, "y": 20, "type": "file" }
     ]
   }
 }
