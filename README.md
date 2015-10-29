@@ -19,12 +19,14 @@ Pull requests welcome :)
 - Electron packager - `npm install -g electron-packager`
 - Electron builder - `npm install -g electron-builder`
 - Wine (To package for Windows - see [https://www.npmjs.com/package/electron-builder](https://www.npmjs.com/package/electron-builder))
+- tar (To package for Linux)
 
 ### Tasks
 
 - Run unit tests - `npm test`
 - Watch files and run tests on changes - `npm run karma`
 - Start app - `npm start`
+- Create installers for release - `npm run installer`
 
 ### License
 
