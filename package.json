@@ -1,6 +1,6 @@
 {
   "name": "blip",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "track your learning visually",
   "main": "app/index.js",
   "devDependencies": {
