@@ -17,13 +17,7 @@ Pull requests welcome :)
 - Bower - `npm install -g bower`
 - Electron - `npm install -g electron-prebuilt`
 - Electron packager - `npm install -g electron-packager`
-
-### Before you can start
-
-```
-npm install
-bower install
-```
+- Electron builder - `npm install -g electron-builder`
 
 ### Tasks
 

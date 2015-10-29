@@ -18,9 +18,11 @@
     "karma": "karma start",
     "prestart": "npm install && bower install",
     "start": "electron app",
-    "clean": "rimraf release",
+    "clean": "rimraf release && rimraf installers",
     "prepackage": "npm run clean",
-    "package": "electron-packager . Blip --all=true --version=0.31.2 --out=release --ignore=node_modules"
+    "package": "electron-packager . Blip --all=true --version=0.31.2 --out=release --ignore=node_modules",
+    "preinstaller": "npm run package",
+    "installer": "electron-builder release/Blip-darwin-x64/Blip.app --platform=osx --out=installers --config=config.json"
   },
   "license": "MIT"
 }
