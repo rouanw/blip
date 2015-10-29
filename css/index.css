@@ -1,0 +1,19 @@
+body {
+  font-family: 'Open Sans';
+}
+
+.header {
+    margin-top: 2em;
+    padding-bottom: 2em;
+    border-bottom: 2px solid #169CFF;
+}
+
+.container {
+  max-width: 70em;
+  margin: auto;
+  margin-top: 2em;
+}
+
+.caption h4 {
+  color: #169CFF;
+}
