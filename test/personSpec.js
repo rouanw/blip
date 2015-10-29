@@ -26,7 +26,7 @@ describe('Person', function () {
     JSON.parse.and.returnValue(expectedObject);
 
     expect(person.get()).toBe(expectedObject);
-    expect(fs.readFileSync.calls.argsFor(0)[0]).toBe('dir/data/person.json');
+    expect(fs.readFileSync.calls.argsFor(0)[0]).toBe('dir/person.json');
     expect(JSON.parse.calls.argsFor(0)[0]).toBe('fileData');
   });
 
@@ -40,7 +40,7 @@ describe('Person', function () {
 
     person.save('some json object');
 
-    expect(fs.writeFileSync.calls.argsFor(0)).toEqual(['dir/data/person.json', 'stringified']);
+    expect(fs.writeFileSync.calls.argsFor(0)).toEqual(['dir/person.json', 'stringified']);
   });
 
   it('should save person to file in a pretty format', function () {
