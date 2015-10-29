@@ -2,7 +2,7 @@
   "osx" : {
     "title": "Blip",
     "background": "app/assets/images/blip_logo.png",
-    "icon": "app/example.icns",
+    "icon": "app/blip.icns",
     "icon-size": 80,
     "contents": [
       { "x": 438, "y": 344, "type": "link", "path": "/Applications" },

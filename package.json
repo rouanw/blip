@@ -16,10 +16,11 @@
   "scripts": {
     "test": "karma start --singleRun",
     "karma": "karma start",
-    "prestart": "npm install && bower install",
+    "prepare": "npm install && bower install",
+    "prestart": "npm run prepare",
     "start": "electron app",
     "clean": "rimraf release && rimraf installers",
-    "prepackage": "npm run clean",
+    "prepackage": "npm run clean && npm run prepare",
     "package": "electron-packager . Blip --all=true --version=0.31.2 --out=release --ignore=node_modules",
     "preinstaller": "npm run package",
     "installer": "electron-builder release/Blip-darwin-x64/Blip.app --platform=osx --out=installers --config=config.json"
