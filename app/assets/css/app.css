@@ -21,7 +21,7 @@ input[type=number] {
   background-color: white;
 }
 
-form[name=edit-person] {
+form[name=editForm] {
   margin-bottom: 8em;
 }
 
