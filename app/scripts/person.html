@@ -10,11 +10,11 @@
   <h2>{{person.name}}</h2>
   <div ng-repeat="assessment in person.assessments" class="col-md-6">
     <h3>{{assessment.category}}</h3>
-    <canvas ng-show="hasEnoughSkillsForRadar(assessment)" radar=""
+    <canvas ng-if="hasEnoughSkillsForRadar(assessment)" radar=""
         assessment="assessment"
         class="radar-block">
     </canvas>
-    <div ng-hide="hasEnoughSkillsForRadar(assessment)" class="radar-block">
+    <div ng-if="!hasEnoughSkillsForRadar(assessment)" class="radar-block">
       <p class="text-muted">
         Blip's radar visualisations don't look great when you're tracking fewer
         than 3 skills in a category.
