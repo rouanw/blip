@@ -14,6 +14,10 @@ input[type=number] {
   min-width: 5em;
 }
 
+input.ng-invalid.ng-touched {
+  border-color: #993031;
+}
+
 .save-all {
   position: fixed;
   bottom: 0px;
