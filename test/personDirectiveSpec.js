@@ -93,8 +93,12 @@ describe('Person directive', function() {
             "skill3": 3
           }
         }
-      ]
-    };
+      ]};
+      expect($rootScope.hasEnoughSkillsForRadar(assessment)).toBeFalsy();
+    });
+
+    it("should return false if assessment's has no ratings property", function() {
+      var assessment = {};
       expect($rootScope.hasEnoughSkillsForRadar(assessment)).toBeFalsy();
     });
   });

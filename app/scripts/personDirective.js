@@ -8,6 +8,9 @@ angular.module('blipApp')
       controller: function ($scope) {
         $scope.person = Person.get();
         $scope.hasEnoughSkillsForRadar = function (assessment) {
+          if (!assessment.ratings) {
+            return false;
+          }
           var mostRecentScores = assessment.ratings[assessment.ratings.length - 1].scores;
           return Object.keys(mostRecentScores).length > 2;
         };
