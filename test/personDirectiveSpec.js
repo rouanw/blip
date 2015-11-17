@@ -10,13 +10,26 @@ describe('Person directive', function() {
           "category": "Photography",
           "ratings" : [
             {
-              scores: { "Editing": 1 }
+              scores: {
+                'Grunt': 1,
+                'Node': 1,
+                'Angular': 4,
+                'CSS': 2
+              },
+            },
+            {
+              scores: {
+                'Grunt': 5,
+                'Node': 1,
+                'Angular': 5,
+                'CSS': 3
+              }
             }
           ]
         },
         {
           "category": "Cricket",
-          "ratings" : [
+        "ratings" : [
             {
               scores: { "Bowling": 1 }
             }
