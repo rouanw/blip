@@ -79,5 +79,6 @@
   <p class="save-all well">
     <button ng-click="save(person)" class="btn btn-success" ng-disabled="editForm.$invalid">Save all</button>
     <button ng-click="discardChanges()" class="btn btn-default">Discard changes</button>
+    <span ng-show="editForm.$invalid" class="error-text">Looks like you have some missing or invalid fields</span>
   </p>
 </form>

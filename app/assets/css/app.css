@@ -18,6 +18,10 @@ input.ng-invalid.ng-touched {
   border-color: #993031;
 }
 
+.error-text {
+  color: #993031;
+}
+
 .save-all {
   position: fixed;
   bottom: 0px;
