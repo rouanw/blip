@@ -1,5 +1,7 @@
 'use strict';
 
+require('electron-cookies');
+
 angular
   .module('blipApp', [
     'ngAnimate',
