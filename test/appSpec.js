@@ -1,4 +1,4 @@
-fdescribe('authenticated directive', function() {
+describe('authenticated directive', function() {
 
   beforeEach(module('blipApp'));
 
