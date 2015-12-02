@@ -2,8 +2,6 @@
 
 angular.module('blipApp')
   .factory('Person', function ($http, $q, $rootScope) {
-    var personFilePath = __dirname + '/person.json';
-    var fs = require('fs');
     return {
       get: function () {
         return $http({url: 'http://localhost:5000/person', method: 'GET', withCredentials: true}).then(function (result) {
@@ -15,7 +13,12 @@ angular.module('blipApp')
         });
       },
       save: function (person) {
-        return fs.writeFileSync(personFilePath, angular.toJson(person, true));
+        $http({
+          url: 'http://localhost:5000/assessments',
+          method: 'PUT',
+          withCredentials: true,
+          data: person.assessments
+        });
       }
     };
   });

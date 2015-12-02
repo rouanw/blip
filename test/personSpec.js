@@ -1,10 +1,5 @@
 describe('Person', function () {
 
-  require = jasmine.createSpy('require');
-  JSON = jasmine.createSpyObj('JSON', ['parse']);
-  angular = jasmine.createSpyObj('angular', ['toJson']);
-  __dirname = 'dir';
-
   var person, httpBackend, rootScope;
 
   beforeEach(module('blipApp'));
@@ -47,19 +42,12 @@ describe('Person', function () {
     rootScope.$digest();
   });
 
-  it('should save person to file on save', function () {
-    angular.toJson.and.returnValue('stringified');
+  it('should save person over http', function () {
+    var fred = { name: 'bob', assessments: ['an assessment'] };
+    httpBackend.expectPUT('http://localhost:5000/assessments', fred.assessments).respond(200, {});
 
-    person.save('some json object');
+    person.save(fred);
 
-    expect(fs.writeFileSync.calls.argsFor(0)).toEqual(['dir/person.json', 'stringified']);
-  });
-
-  it('should save person to file in a pretty format', function () {
-    angular.toJson.and.returnValue('stringified');
-
-    person.save('some json object');
-
-    expect(angular.toJson.calls.argsFor(0)).toEqual(['some json object', true]);
+    httpBackend.flush();
   });
 });
