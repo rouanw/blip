@@ -33,6 +33,20 @@ describe('Person', function () {
     rootScope.$digest();
   });
 
+  it('should return and set unauthenticated flag on root scope when no person is returned', function () {
+    var result = {someKey: 'value'};
+    httpBackend.expectGET('http://localhost:5000/person').respond(200, result);
+    var callback = jasmine.createSpy('callback');
+
+    person.get().then(callback);
+    httpBackend.flush();
+
+    expect(callback).toHaveBeenCalledWith(undefined);
+    expect(rootScope.unauthenticated).toBeTruthy();
+
+    rootScope.$digest();
+  });
+
   it('should save person to file on save', function () {
     angular.toJson.and.returnValue('stringified');
 
