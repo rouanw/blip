@@ -47,6 +47,9 @@ angular.module('blipApp')
           }
           person.assessments.push({});
         };
+        $scope.removeAssessment = function (person, index) {
+          person.assessments.splice(index, 1);
+        };
         $scope.discardChanges = function () {
           $window.location.reload();
         };

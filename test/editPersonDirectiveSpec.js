@@ -194,6 +194,22 @@ describe('Edit person directive', function() {
     });
   });
 
+  describe('remove assessment category', function () {
+
+    beforeEach(function () {
+      spyOn(person, 'get').and.returnValue($q.when(adaLovelace));
+      $compile('<edit-person></edit-person>')($rootScope);
+      $rootScope.$digest();
+    });
+
+    it('should remove assessment from person', function () {
+      var oldLength = adaLovelace.assessments.length;
+      $rootScope.removeAssessment(adaLovelace, 0);
+      expect(adaLovelace.assessments.length).toBe(oldLength - 1);
+      expect(adaLovelace.assessments[0].category).not.toBe("Photography");
+    });
+  });
+
   describe('discard changes', function () {
     beforeEach(function () {
       spyOn(person, 'get').and.returnValue($q.when(adaLovelace));
