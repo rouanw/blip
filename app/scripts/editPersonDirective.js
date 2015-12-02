@@ -10,7 +10,10 @@ angular.module('blipApp')
           $scope.person = result;
         });
         $scope.save = function (person) {
-          Person.save(person);
+          $scope.saving = true;
+          Person.save(person).then(function () {
+            $scope.saving = false;
+          });
         };
         $scope.addRating = function (assessment) {
           if (!assessment.ratings) {

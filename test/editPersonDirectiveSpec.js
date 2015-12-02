@@ -55,13 +55,36 @@ describe('Edit person directive', function() {
 
   it("should save the person's details on save", function() {
     spyOn(person, 'get').and.returnValue($q.when('a person'));
-    spyOn(person, 'save');
+    spyOn(person, 'save').and.returnValue($q.when({}));
     var element = $compile('<edit-person></edit-person>')($rootScope);
     $rootScope.$digest();
 
     $rootScope.save('william faulkner');
 
     expect(person.save.calls.argsFor(0)[0]).toBe('william faulkner');
+  });
+
+  it("should set saving flag", function() {
+    spyOn(person, 'get').and.returnValue($q.when('a person'));
+    spyOn(person, 'save').and.returnValue($q.when({}));
+    var element = $compile('<edit-person></edit-person>')($rootScope);
+    $rootScope.$digest();
+
+    $rootScope.save('something');
+
+    expect($rootScope.saving).toBeTruthy();
+  });
+
+  it("should reset saving flag when save is complete", function() {
+    spyOn(person, 'get').and.returnValue($q.when('a person'));
+    var element = $compile('<edit-person></edit-person>')($rootScope);
+    $rootScope.$digest();
+    spyOn(person, 'save').and.returnValue($q.when('something'));
+
+    $rootScope.save('something');
+    $rootScope.$digest();
+
+    expect($rootScope.saving).toBeFalsy();
   });
 
   describe('add rating', function () {
