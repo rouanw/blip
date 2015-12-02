@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('blipApp')
-  .directive('signIn', function ($http, $rootScope, Person) {
+  .directive('signIn', function ($http, $rootScope, Person, $cookies) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/sign-in.html',
@@ -10,6 +10,11 @@ angular.module('blipApp')
         $rootScope.$on('loggedin', function () {
           console.log('logged in');
         })
+
+        $rootScope.authenticated = function () {
+          return ($cookies.get('blipsession'));
+        };
+
         $scope.signIn = function () {
           $http.get('http://localhost:5000/person').then(function (result) {
             if (result.data.uid) {
@@ -25,9 +30,9 @@ angular.module('blipApp')
                   authWindow.webContents.session.cookies.get({},
                       function(error, cookies) {
                         _.forEach(cookies, function (cookie) {
-                          if (cookie.name === 'rack.session') {
+                          if (cookie.name === 'blipsession') {
                             var rackCookie = cookie.name + "=" + cookie.value;
-                            document.cookie = rackCookie;
+                            $cookies['blipsession', rackCookie];
                           }
                         });
                   });
