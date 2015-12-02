@@ -40,7 +40,9 @@
       <span class="label label-info">5</span>
       <span class="label label-primary">Can teach others</span>
       <hr />
-      <div ng-view=""></div>
+      <div ng-view="">
+        <span ng-show="$root.loading"><img src="assets/images/ajax-loader.gif"/> Loading</span>
+      </div>
     </div>
 
     <script src="bower_components/angular/angular.js"></script>

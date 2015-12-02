@@ -1,13 +1,16 @@
 'use strict';
 
 angular.module('blipApp')
-  .directive('editPerson', function (Person, $window) {
+  .directive('editPerson', function (Person, $window, $rootScope) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/edit-person.html',
       controller: function ($scope) {
+        $rootScope.loading = true;
         Person.get().then(function (result) {
           $scope.person = result;
+        }).finally(function (){
+          $rootScope.loading = false;
         });
         $scope.save = function (person) {
           $scope.saving = true;

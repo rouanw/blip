@@ -1,13 +1,16 @@
 'use strict';
 
 angular.module('blipApp')
-  .directive('person', function (Person) {
+  .directive('person', function (Person, $rootScope) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/person.html',
       controller: function ($scope) {
+        $rootScope.loading = true;
         Person.get().then(function (person) {
           $scope.person = person;
+        }).finally(function () {
+          $rootScope.loading = false;
         });
         $scope.hasEnoughSkillsForRadar = function (assessment) {
           if (!assessment.ratings) {

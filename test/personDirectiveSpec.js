@@ -59,6 +59,14 @@ describe('Person directive', function() {
       expect($rootScope.person).toBe('a person');
     });
 
+    it("should reset loading flag when promise resolves", function() {
+      $rootScope.loading = true;
+      spyOn(person, 'get').and.returnValue(q.when('a person'));
+      var element = $compile('<person></person>')($rootScope);
+      $rootScope.$digest();
+      expect($rootScope.loading).toBeFalsy();
+    });
+
     it("should display the person's name", function() {
       spyOn(person, 'get').and.returnValue(q.when(adaLovelace));
       var element = $compile('<person></person>')($rootScope);
