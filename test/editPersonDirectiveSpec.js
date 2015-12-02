@@ -1,10 +1,13 @@
-describe('Person directive', function() {
+describe('Edit person directive', function() {
   var $compile,
       $rootScope,
-      person;
+      person,
+      $q;
 
   var adaLovelace = {
-      "name" : "Ada Lovelace",
+      "info": {
+        "name" : "Ada Lovelace"
+      },
       "assessments": [
         {
           "category": "Photography",
@@ -36,21 +39,22 @@ describe('Person directive', function() {
   beforeEach(module('scripts/edit-person.html'));
   beforeEach(module('scripts/view.html'));
 
-  beforeEach(inject(function(_$compile_, _$rootScope_, Person){
+  beforeEach(inject(function(_$compile_, _$rootScope_, Person, _$q_){
     $compile = _$compile_;
     $rootScope = _$rootScope_;
     person = Person;
+    $q = _$q_;
   }));
 
   it("should get the person's details", function() {
-    spyOn(person, 'get').and.returnValue('someone');
+    spyOn(person, 'get').and.returnValue($q.when('someone'));
     var element = $compile('<edit-person></edit-person>')($rootScope);
     $rootScope.$digest();
     expect($rootScope.person).toBe('someone');
   });
 
   it("should save the person's details on save", function() {
-    spyOn(person, 'get').and.returnValue('a person');
+    spyOn(person, 'get').and.returnValue($q.when('a person'));
     spyOn(person, 'save');
     var element = $compile('<edit-person></edit-person>')($rootScope);
     $rootScope.$digest();
@@ -63,7 +67,7 @@ describe('Person directive', function() {
   describe('add rating', function () {
 
     beforeEach(function () {
-      spyOn(person, 'get').and.returnValue(adaLovelace);
+      spyOn(person, 'get').and.returnValue($q.when(adaLovelace));
       $compile('<edit-person></edit-person>')($rootScope);
       $rootScope.$digest();
     });
@@ -100,7 +104,7 @@ describe('Person directive', function() {
   describe('add skill', function () {
 
     beforeEach(function () {
-      spyOn(person, 'get').and.returnValue(adaLovelace);
+      spyOn(person, 'get').and.returnValue($q.when(adaLovelace));
       $compile('<edit-person></edit-person>')($rootScope);
       $rootScope.$digest();
     });
@@ -123,7 +127,7 @@ describe('Person directive', function() {
   describe('remove skill', function () {
 
     beforeEach(function () {
-      spyOn(person, 'get').and.returnValue(adaLovelace);
+      spyOn(person, 'get').and.returnValue($q.when(adaLovelace));
       $compile('<edit-person></edit-person>')($rootScope);
       $rootScope.$digest();
     });
@@ -141,7 +145,7 @@ describe('Person directive', function() {
   describe('add assessment category', function () {
 
     beforeEach(function () {
-      spyOn(person, 'get').and.returnValue(adaLovelace);
+      spyOn(person, 'get').and.returnValue($q.when(adaLovelace));
       $compile('<edit-person></edit-person>')($rootScope);
       $rootScope.$digest();
     });
@@ -161,7 +165,7 @@ describe('Person directive', function() {
 
   describe('discard changes', function () {
     beforeEach(function () {
-      spyOn(person, 'get').and.returnValue(adaLovelace);
+      spyOn(person, 'get').and.returnValue($q.when(adaLovelace));
       $compile('<edit-person></edit-person>')($rootScope);
       $rootScope.$digest();
     });
