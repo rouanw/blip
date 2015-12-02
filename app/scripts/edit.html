@@ -1,1 +1,2 @@
-<edit-person></edit-person>
+<edit-person ng-if="$root.authenticated"></edit-person>
+<sign-in ng-if="!$root.authenticated"></sign-in>
