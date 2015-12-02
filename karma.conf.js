@@ -6,6 +6,7 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
     files: [
+      'test/requireSpy.js',
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-animate/angular-animate.js',
       'app/bower_components/angular-cookies/angular-cookies.js',

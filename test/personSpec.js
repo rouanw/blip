@@ -5,34 +5,32 @@ describe('Person', function () {
   angular = jasmine.createSpyObj('angular', ['toJson']);
   __dirname = 'dir';
 
-  var person, fs;
+  var person, httpBackend, rootScope;
+
+  beforeEach(module('blipApp'));
 
   beforeEach(function () {
     fs = jasmine.createSpyObj('fs', ['readFileSync', 'writeFileSync']);
     require.and.returnValue(fs);
   });
 
-  beforeEach(module('blipApp'));
-
-  beforeEach(inject(function(Person){
+  beforeEach(inject(function($httpBackend, Person, $rootScope){
     person = Person;
+    httpBackend = $httpBackend;
+    rootScope = $rootScope;
   }));
 
-  it('should load person from file', function () {
-    var expectedObject = {
-      someKey: 'someValue'
-    };
-    fs.readFileSync.and.returnValue('fileData');
-    JSON.parse.and.returnValue(expectedObject);
+  it('should get person over http and return promise', function () {
+    var result = {someKey: 'value', uid: 'uid'};
+    httpBackend.expectGET('http://localhost:5000/person').respond(200, result);
+    var callback = jasmine.createSpy('callback');
 
-    expect(person.get()).toBe(expectedObject);
-    expect(fs.readFileSync.calls.argsFor(0)[0]).toBe('dir/person.json');
-    expect(JSON.parse.calls.argsFor(0)[0]).toBe('fileData');
-  });
+    person.get().then(callback);
+    httpBackend.flush();
 
-  it("should return a new person if file doesn't exist", function () {
-    fs.readFileSync.and.throwError('ENOENT');
-    expect(person.get()).toEqual({});
+    expect(callback).toHaveBeenCalledWith(result);
+
+    rootScope.$digest();
   });
 
   it('should save person to file on save', function () {

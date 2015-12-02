@@ -1,4 +1,4 @@
-fdescribe('Sign in directive', function() {
+describe('Sign in directive', function() {
   var $compile,
       $rootScope,
       element,

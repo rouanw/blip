@@ -6,7 +6,9 @@ angular.module('blipApp')
       restrict: 'E',
       templateUrl: 'scripts/person.html',
       controller: function ($scope) {
-        $scope.person = Person.get();
+        Person.get().then(function (person) {
+          $scope.person = person;
+        });
         $scope.hasEnoughSkillsForRadar = function (assessment) {
           if (!assessment.ratings) {
             return false;
