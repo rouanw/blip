@@ -13,7 +13,7 @@ angular.module('blipApp')
         });
       },
       save: function (person) {
-        $http({
+        return $http({
           url: 'http://localhost:5000/assessments',
           method: 'PUT',
           withCredentials: true,

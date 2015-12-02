@@ -50,4 +50,15 @@ describe('Person', function () {
 
     httpBackend.flush();
   });
+
+  it('should return promise on save', function () {
+    var fred = { assessments: [] };
+    var response = {};
+    httpBackend.when('http://localhost:5000/assessments', fred.assessments).respond(200, response);
+
+    var promise = person.save(fred);
+
+    expect(promise).toBeTruthy('promise should be returned');
+    expect(promise.then instanceof Function).toBeTruthy('should be a promise');
+  });
 });
