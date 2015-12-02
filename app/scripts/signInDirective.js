@@ -23,12 +23,9 @@ angular.module('blipApp')
               });
             });
             authWindow.on('closed', function() {
-              var $body = angular.element(document.body);
-              var $rootScope = $body.injector().get('$rootScope');
               $rootScope.unauthenticated = false;
               $scope.authenticating = false;
               $rootScope.$digest();
-              authWindow = null;
             });
           });
         };
