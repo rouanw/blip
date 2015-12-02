@@ -6,13 +6,14 @@ angular.module('blipApp')
       restrict: 'E',
       templateUrl: 'scripts/sign-in.html',
       controller: function ($scope) {
-        $scope.signIn = function () {
+        $scope.signIn = function (provider) {
+          var authUrl = 'http://blip-api.herokuapp.com/auth/' + provider;
           $scope.authenticating = true;
-          $http.get('http://blip-api.herokuapp.com/auth/twitter').then(function (result) {
+          $http.get(authUrl).then(function (result) {
             var remote = require('remote');
             var BrowserWindow = remote.require('browser-window');
             var authWindow = new BrowserWindow({ width: 800, height: 600, 'node-integration': false, title: 'Sign in to Blip' });
-            authWindow.loadUrl('http://blip-api.herokuapp.com/auth/twitter');
+            authWindow.loadUrl(authUrl);
             authWindow.webContents.on('did-stop-loading', function () {
               authWindow.webContents.session.cookies.get({}, function(error, cookies) {
                 _.forEach(cookies, function (cookie) {

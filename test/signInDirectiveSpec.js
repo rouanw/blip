@@ -38,9 +38,15 @@ describe('Sign in directive', function() {
 
   describe('sign in', function () {
 
-    it('calls to authenticate with provider when sign in for that provider is clicked', function() {
+    it('calls to authenticate with provider when sign in is clicked', function() {
       httpBackend.expectGET('http://blip-api.herokuapp.com/auth/twitter').respond(200, {});
-      element.find('a').triggerHandler('click');
+      $rootScope.signIn('twitter')
+      httpBackend.flush();
+    });
+
+    it('calls to authenticate with provider when sign in is clicked', function() {
+      httpBackend.expectGET('http://blip-api.herokuapp.com/auth/blah').respond(200, {});
+      $rootScope.signIn('blah')
       httpBackend.flush();
     });
 
@@ -50,25 +56,25 @@ describe('Sign in directive', function() {
       });
 
       it('should set authenticating to true', function () {
-        $rootScope.signIn();
+        $rootScope.signIn('twitter');
         httpBackend.flush();
         expect($rootScope.authenticating).toBeTruthy();
       });
 
       it('should create a new browser window', function () {
-        $rootScope.signIn();
+        $rootScope.signIn('twitter');
         httpBackend.flush();
         expect(browserWindow).toHaveBeenCalledWith({ width: 800, height: 600, 'node-integration': false, title: 'Sign in to Blip' });
       });
 
       it('should open a new window for the user to authenticate in', function () {
-        $rootScope.signIn();
+        $rootScope.signIn('twitter');
         httpBackend.flush();
         expect(authWindow.loadUrl).toHaveBeenCalledWith('http://blip-api.herokuapp.com/auth/twitter');
       });
 
       it('should register a callback for when the authWindow is closed', function () {
-        $rootScope.signIn();
+        $rootScope.signIn('twitter');
         httpBackend.flush();
         expect(authWindow.on).toHaveBeenCalledWith('closed', jasmine.any(Function));
       });
@@ -76,7 +82,7 @@ describe('Sign in directive', function() {
       describe('authWindow close callback', function () {
         var callback;
         beforeEach(function (){
-          $rootScope.signIn();
+          $rootScope.signIn('twitter');
           httpBackend.flush();
           callback = authWindow.on.calls.argsFor(0)[1];
         });
@@ -99,7 +105,7 @@ describe('Sign in directive', function() {
       });
 
       it('should register a callback for when the webContents of the authWindow is done loading', function () {
-        $rootScope.signIn();
+        $rootScope.signIn('twitter');
         httpBackend.flush();
         expect(authWindow.webContents.on).toHaveBeenCalledWith('did-stop-loading', jasmine.any(Function));
       });
@@ -107,7 +113,7 @@ describe('Sign in directive', function() {
       describe('webContents done loading callback', function () {
         var callback;
         beforeEach(function () {
-          $rootScope.signIn();
+          $rootScope.signIn('twitter');
           httpBackend.flush();
           callback = authWindow.webContents.on.calls.argsFor(0)[1];
         });

@@ -1,5 +1,9 @@
-<a class="btn btn-social btn-twitter btn-lg" ng-click="signIn()" ng-disabled="authenticating">
+<a class="btn btn-social btn-twitter btn-lg" ng-click="signIn('twitter')" ng-disabled="authenticating">
    <span class="fa fa-twitter"></span> Sign in with Twitter
+</a>
+
+<a class="btn btn-social btn-github btn-lg" ng-click="signIn('github')" ng-disabled="authenticating">
+   <span class="fa fa-github"></span> Sign in with GitHub
 </a>
 
 &nbsp;<span ng-show="authenticating"><img src="assets/images/ajax-loader.gif"/> Signing in</span>
