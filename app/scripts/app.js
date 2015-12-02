@@ -19,4 +19,8 @@ angular
       .when('/edit', {
         templateUrl: 'scripts/edit.html'
       });
+  }).run(function ($cookies, $rootScope) {
+    $rootScope.authenticated = function () {
+      return $cookies.get('blipsession');
+    };
   });

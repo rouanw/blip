@@ -1,2 +1,2 @@
-<person authenticated="" ng-show="authenticated()"></person>
-<sign-in authenticated="" ng-hide="authenticated()"></sign-in>
+<person ng-if="$root.authenticated()"></person>
+<sign-in ng-if="!$root.authenticated()"></sign-in>
