@@ -58,6 +58,17 @@ describe('Person directive', function() {
     expect($rootScope.person).toBe('a person');
   });
 
+  it("should set the person object to a temporary skeleton to avoid chartsjs quirck and display charts correctly", function() {
+    spyOn(person, 'get').and.returnValue(q.reject(''));
+    var element = $compile('<person></person>')($rootScope);
+    $rootScope.$digest();
+    expect($rootScope.person).not.toBeUndefined();
+    expect($rootScope.person.assessments.length).toBe(1);
+    expect($rootScope.person.assessments[0].ratings.length).toBe(1);
+    expect($rootScope.person.assessments[0].ratings[0].scores).not.toBeUndefined();
+  });
+
+
   it("should display the person's name", function() {
     spyOn(person, 'get').and.returnValue(q.when(adaLovelace));
     var element = $compile('<person></person>')($rootScope);
