@@ -9,14 +9,10 @@ angular.module('blipApp')
         var authWindow;
         $rootScope.$on('loggedin', function () {
           console.log('logged in');
-        })
-
-        $rootScope.authenticated = function () {
-          return ($cookies.get('blipsession'));
-        };
+        });
 
         $scope.signIn = function () {
-          $http.get('http://localhost:5000/person').then(function (result) {
+          $http.get('http://localhost:5000/auth/twitter').then(function (result) {
             if (result.data.uid) {
                 Person.set(result.data);
                 $rootScope.authenticated = true;
@@ -31,8 +27,7 @@ angular.module('blipApp')
                       function(error, cookies) {
                         _.forEach(cookies, function (cookie) {
                           if (cookie.name === 'blipsession') {
-                            var rackCookie = cookie.name + "=" + cookie.value;
-                            $cookies['blipsession', rackCookie];
+                            $cookies.put(cookie.name, cookie.value);
                           }
                         });
                   });

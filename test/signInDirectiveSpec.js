@@ -15,8 +15,8 @@ describe('Sign in directive', function() {
     $rootScope.$digest();
   }));
 
-  it('calls to authenticate with provider when sign in for that provider is clicked', function() {
-    httpBackend.expectGET('http://localhost:5000/auth/github').respond(200, {});
+  xit('calls to authenticate with provider when sign in for that provider is clicked', function() {
+    httpBackend.expectGET('http://localhost:5000/auth/twitter').respond(200, {});
     element.find('a').triggerHandler('click');
     httpBackend.flush();
   });
