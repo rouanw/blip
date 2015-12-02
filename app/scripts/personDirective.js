@@ -6,18 +6,6 @@ angular.module('blipApp')
       restrict: 'E',
       templateUrl: 'scripts/person.html',
       controller: function ($scope) {
-        var skeleton = {
-            "assessments": [
-              {
-                "ratings": [
-                  {
-                    "scores": {}
-                  }
-                ]
-              }
-            ]
-        };
-        $scope.person = skeleton;
         Person.get().then(function (person) {
           $scope.person = person;
         });

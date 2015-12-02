@@ -51,44 +51,35 @@ describe('Person directive', function() {
     q = $q;
   }));
 
-  it("should get the person's details", function() {
-    spyOn(person, 'get').and.returnValue(q.when('a person'));
-    var element = $compile('<person></person>')($rootScope);
-    $rootScope.$digest();
-    expect($rootScope.person).toBe('a person');
-  });
+  describe('get person', function () {
+    it("should get the person's details", function() {
+      spyOn(person, 'get').and.returnValue(q.when('a person'));
+      var element = $compile('<person></person>')($rootScope);
+      $rootScope.$digest();
+      expect($rootScope.person).toBe('a person');
+    });
 
-  it("should set the person object to a temporary skeleton to avoid chartsjs quirck and display charts correctly", function() {
-    spyOn(person, 'get').and.returnValue(q.reject(''));
-    var element = $compile('<person></person>')($rootScope);
-    $rootScope.$digest();
-    expect($rootScope.person).not.toBeUndefined();
-    expect($rootScope.person.assessments.length).toBe(1);
-    expect($rootScope.person.assessments[0].ratings.length).toBe(1);
-    expect($rootScope.person.assessments[0].ratings[0].scores).not.toBeUndefined();
-  });
+    it("should display the person's name", function() {
+      spyOn(person, 'get').and.returnValue(q.when(adaLovelace));
+      var element = $compile('<person></person>')($rootScope);
+      $rootScope.$digest();
+      expect(element.find('h2').text()).toBe('Ada Lovelace');
+    });
 
+    it('should display the category name of each assessment a person has', function() {
+      spyOn(person, 'get').and.returnValue(q.when(adaLovelace));
+      var element = $compile('<person></person>')($rootScope);
+      $rootScope.$digest();
+      expect(element.find('h3').eq(0).text()).toBe('Photography');
+      expect(element.find('h3').eq(1).text()).toBe('Cricket');
+    });
 
-  it("should display the person's name", function() {
-    spyOn(person, 'get').and.returnValue(q.when(adaLovelace));
-    var element = $compile('<person></person>')($rootScope);
-    $rootScope.$digest();
-    expect(element.find('h2').text()).toBe('Ada Lovelace');
-  });
-
-  it('should display the category name of each assessment a person has', function() {
-    spyOn(person, 'get').and.returnValue(q.when(adaLovelace));
-    var element = $compile('<person></person>')($rootScope);
-    $rootScope.$digest();
-    expect(element.find('h3').eq(0).text()).toBe('Photography');
-    expect(element.find('h3').eq(1).text()).toBe('Cricket');
-  });
-
-  it('should include a canvas', function() {
-    spyOn(person, 'get').and.returnValue(q.when(adaLovelace));
-    var element = $compile('<person></person>')($rootScope);
-    $rootScope.$digest();
-    expect(element.html()).toContain('<canvas');
+    it('should render a canvas', function() {
+      spyOn(person, 'get').and.returnValue(q.when(adaLovelace));
+      var element = $compile('<person></person>')($rootScope);
+      $rootScope.$digest();
+      expect(element.html()).toContain('<canvas');
+    });
   });
 
   describe('hasEnoughSkillsForRadar', function () {
