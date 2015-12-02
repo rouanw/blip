@@ -9,9 +9,11 @@ angular.module('blipApp')
         var authWindow;
         $rootScope.$on('loggedin', function () {
           console.log('logged in');
+          $rootScope.$digest();
         });
 
         $scope.signIn = function () {
+          $scope.authenticating = true;
           $http.get('http://localhost:5000/auth/twitter').then(function (result) {
             if (result.data.uid) {
                 Person.set(result.data);
@@ -37,6 +39,7 @@ angular.module('blipApp')
                   var $body = angular.element(document.body);
                   var $rootScope = $body.injector().get('$rootScope')
                   $rootScope.$emit('loggedin');
+                  $scope.authenticating = false;
                 });
             }
           });
