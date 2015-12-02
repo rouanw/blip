@@ -39,14 +39,14 @@ describe('Sign in directive', function() {
   describe('sign in', function () {
 
     it('calls to authenticate with provider when sign in for that provider is clicked', function() {
-      httpBackend.expectGET('http://localhost:5000/auth/twitter').respond(200, {});
+      httpBackend.expectGET('http://blip-api.herokuapp.com/auth/twitter').respond(200, {});
       element.find('a').triggerHandler('click');
       httpBackend.flush();
     });
 
     describe('when the response is received', function () {
       beforeEach(function () {
-        httpBackend.expectGET('http://localhost:5000/auth/twitter').respond(200, $q.when({}));
+        httpBackend.expectGET('http://blip-api.herokuapp.com/auth/twitter').respond(200, $q.when({}));
       });
 
       it('should set authenticating to true', function () {
@@ -64,7 +64,7 @@ describe('Sign in directive', function() {
       it('should open a new window for the user to authenticate in', function () {
         $rootScope.signIn();
         httpBackend.flush();
-        expect(authWindow.loadUrl).toHaveBeenCalledWith('http://localhost:5000/auth/twitter');
+        expect(authWindow.loadUrl).toHaveBeenCalledWith('http://blip-api.herokuapp.com/auth/twitter');
       });
 
       it('should register a callback for when the authWindow is closed', function () {
