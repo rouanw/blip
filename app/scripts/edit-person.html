@@ -3,8 +3,9 @@
 <form name="editForm">
   <div class="form-group">
     <label for="name">Your name</label>
-    <input type="text" class="form-control" id="name" placeholder="Name" name="name"
-      ng-model="person.name" required="required" ng-trim="true">
+    <div class="form-control-static">
+      {{person.info.name}}
+    </div>
   </div>
   <div ng-repeat="assessment in person.assessments" class="well">
     <h4>Your {{assessment.category}} Ratings</h4>

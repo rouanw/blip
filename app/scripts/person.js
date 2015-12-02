@@ -6,7 +6,7 @@ angular.module('blipApp')
     var fs = require('fs');
     return {
       get: function () {
-        return $http({url: 'http://localhost:5000/person', method: 'GET'}).then(function (result) {
+        return $http({url: 'http://localhost:5000/person', method: 'GET', withCredentials: true}).then(function (result) {
           return result.data;
         });
       },

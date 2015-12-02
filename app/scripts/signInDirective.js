@@ -18,14 +18,16 @@ angular.module('blipApp')
                 _.forEach(cookies, function (cookie) {
                   if (cookie.name === 'blipsession') {
                     $cookies.put(cookie.name, cookie.value);
-                    var $body = angular.element(document.body);
-                    var $rootScope = $body.injector().get('$rootScope');
-                    $rootScope.$digest();
-                    $scope.authenticating = false;
-                    authWindow.close();
                   }
                 });
               });
+            });
+            authWindow.on('closed', function() {
+              var $body = angular.element(document.body);
+              var $rootScope = $body.injector().get('$rootScope');
+              $rootScope.$digest();
+              $scope.authenticating = false;
+              authWindow = null;
             });
           });
         };

@@ -5,7 +5,9 @@ describe('Person directive', function() {
       q;
 
   var adaLovelace = {
-      "name" : "Ada Lovelace",
+      info: {
+        "name" : "Ada Lovelace"
+      },
       "assessments": [
         {
           "category": "Photography",
