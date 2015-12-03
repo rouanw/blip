@@ -8,7 +8,7 @@ angular.module('blipApp')
       controller: function ($scope) {
         $scope.signIn = function (provider) {
           var authUrl = 'http://blip-api.herokuapp.com/auth/' + provider;
-          $scope.authenticating = true;
+          $rootScope.authenticating = true;
           $http.get(authUrl).then(function (result) {
             var remote = require('remote');
             var BrowserWindow = remote.require('browser-window');
@@ -30,7 +30,7 @@ angular.module('blipApp')
             });
 
             authWindow.on('closed', function () {
-              $scope.authenticating = false;
+              $rootScope.authenticating = false;
               $rootScope.$digest();
             });
           });
