@@ -14,7 +14,8 @@ angular.module('blipApp')
             var BrowserWindow = remote.require('browser-window');
             var authWindow = new BrowserWindow({ width: 800, height: 600, 'node-integration': false, title: 'Sign in to Blip' });
             authWindow.loadUrl(authUrl);
-            authWindow.webContents.on('did-stop-loading', function () {
+
+            authWindow.webContents.on('did-get-response-details', function (event, status, newUrl) {
               authWindow.webContents.session.cookies.get({}, function(error, cookies) {
                 _.forEach(cookies, function (cookie) {
                   if (cookie.name === 'blipsession') {
@@ -22,9 +23,13 @@ angular.module('blipApp')
                   }
                 });
               });
+              if (newUrl.indexOf('/auth/' + provider + '/callback') > -1) {
+                $rootScope.unauthenticated = false;
+                authWindow.close();
+              }
             });
-            authWindow.on('closed', function() {
-              $rootScope.unauthenticated = false;
+
+            authWindow.on('closed', function () {
               $scope.authenticating = false;
               $rootScope.$digest();
             });

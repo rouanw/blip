@@ -29,7 +29,8 @@ describe('Sign in directive', function() {
           cookies: jasmine.createSpyObj('cookies', ['get'])
         }
       },
-      on: jasmine.createSpy('on')
+      on: jasmine.createSpy('on'),
+      close: jasmine.createSpy('close')
     };
     browserWindow.and.returnValue(authWindow);
     remote.require.and.returnValue(browserWindow);
@@ -88,29 +89,24 @@ describe('Sign in directive', function() {
         });
 
         it('should set authenticating to false', function () {
-          callback();
+          callback('', '', 'http://somewhere/auth/twitter/callback');
           expect($rootScope.authenticating).toBeFalsy();
-        });
-
-        it('should set unauthenticated to false', function () {
-          callback();
-          expect($rootScope.unauthenticated).toBeFalsy();
         });
 
         it('should initiate a digest cycle', function () {
           spyOn($rootScope, '$digest');
-          callback();
+          callback('', '', 'http://somewhere/auth/twitter/callback');
           expect($rootScope.$digest).toHaveBeenCalled();
         });
       });
 
-      it('should register a callback for when the webContents of the authWindow is done loading', function () {
+      it('should register a callback for when the webContents of the authWindow has successfully completed an HTPP GET', function () {
         $rootScope.signIn('twitter');
         httpBackend.flush();
-        expect(authWindow.webContents.on).toHaveBeenCalledWith('did-stop-loading', jasmine.any(Function));
+        expect(authWindow.webContents.on).toHaveBeenCalledWith('did-get-response-details', jasmine.any(Function));
       });
 
-      describe('webContents done loading callback', function () {
+      describe('webContents did-get-response-details callback', function () {
         var callback;
         beforeEach(function () {
           $rootScope.signIn('twitter');
@@ -118,15 +114,33 @@ describe('Sign in directive', function() {
           callback = authWindow.webContents.on.calls.argsFor(0)[1];
         });
 
+        it('should close the authentication window when url fetched is the auth callback', function () {
+          spyOn($rootScope, '$digest');
+          callback('', '', 'http://somewhere/auth/twitter/callback');
+          expect(authWindow.close).toHaveBeenCalled();
+        });
+
+        it('should close the authentication window when url fetched is the auth callback', function () {
+          $rootScope.unauthenticated = true;
+          callback('', '', 'http://somewhere/auth/twitter/callback');
+          expect($rootScope.unauthenticated).toBeFalsy();
+        });
+
+        it('should not close the authentication window when url fetched is not the auth callback', function () {
+          spyOn($rootScope, '$digest');
+          callback('', '', 'somethingelse');
+          expect(authWindow.close).not.toHaveBeenCalled();
+        });
+
         it('should get cookies and register a callback for when they are retrieved', function () {
-          callback();
+          callback('', '', '');
           expect(authWindow.webContents.session.cookies.get).toHaveBeenCalledWith({}, jasmine.any(Function));
         });
 
         describe('get cookies callback', function () {
           var cookiesCallback;
           beforeEach(function () {
-            callback();
+            callback('', '', '');
             cookiesCallback = authWindow.webContents.session.cookies.get.calls.argsFor(0)[1];
           });
 
