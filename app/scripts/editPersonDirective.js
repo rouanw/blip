@@ -6,11 +6,8 @@ angular.module('blipApp')
       restrict: 'E',
       templateUrl: 'scripts/edit-person.html',
       controller: function ($scope) {
-        $rootScope.loading = true;
         Person.get().then(function (result) {
           $scope.person = result;
-        }).finally(function (){
-          $rootScope.loading = false;
         });
         $scope.save = function (person) {
           $scope.saving = true;

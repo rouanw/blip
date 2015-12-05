@@ -1,4 +1,5 @@
-<div ng-show="person">
+<span ng-if="!person"><img src="assets/images/ajax-loader.gif"/> Loading</span>
+<div ng-if="person">
   <h2>Track your learning</h2>
 
   <form name="editForm">

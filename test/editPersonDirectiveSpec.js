@@ -53,14 +53,6 @@ describe('Edit person directive', function() {
     expect($rootScope.person).toBe('someone');
   });
 
-  it("should reset loading flag when promise resolves on get", function() {
-    $rootScope.loading = true;
-    spyOn(person, 'get').and.returnValue($q.when('someone'));
-    var element = $compile('<edit-person></edit-person>')($rootScope);
-    $rootScope.$digest();
-    expect($rootScope.loading).toBeFalsy();
-  });
-
   it("should save the person's details on save", function() {
     spyOn(person, 'get').and.returnValue($q.when('a person'));
     spyOn(person, 'save').and.returnValue($q.when({}));
