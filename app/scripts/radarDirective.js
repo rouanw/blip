@@ -26,8 +26,8 @@ angular.module('blipApp')
           datasets: [dataset]
         };
 
-        var ctx = elem[0].getContext('2d');
-        scope.chart = new Chart(ctx).Radar(chartContent, {scaleShowLabels: true});
+        var context = elem[0].getContext('2d');
+        scope.chart = new Chart(context).Radar(chartContent, {scaleShowLabels: true});
       }
     };
   });
