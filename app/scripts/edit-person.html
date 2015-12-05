@@ -1,88 +1,90 @@
-<h2>Track your learning</h2>
+<div ng-show="person">
+  <h2>Track your learning</h2>
 
-<form name="editForm">
-  <div class="form-group">
-    <label for="name">Your name</label>
-    <div class="form-control-static">
-      {{person.info.name || person.info.nickname}}
-    </div>
-  </div>
-  <div ng-repeat="assessment in person.assessments" class="well">
-    <h4>Your {{assessment.category}} Ratings</h4>
+  <form name="editForm">
     <div class="form-group">
-      <label for="category{{$index}}">Category name</label>
-      <a href="javascript:void(0)" ng-click="removeAssessment(person, $index)" class="pull-right">Remove this category</a>
-      <input type="text" class="form-control" id="category{{$index}}" name="category{{$index}}"
-        placeholder="What are you learning about?"
-        ng-model="assessment.category" required="required" ng-trim="true">
+      <label for="name">Your name</label>
+      <div class="form-control-static">
+        {{person.info.name || person.info.nickname}}
+      </div>
     </div>
-    <div class="form-group">
-      <a href="javascript:void(0)"
-          ng-click="showOlderRatings = !showOlderRatings"
-          ng-show="assessment.ratings.length > 2">
-        {{showOlderRatings ? '- Hide': '+ Show'}} older ratings
-      </a>
-    </div>
-    <div class="form-group" ng-repeat="rating in assessment.ratings"
-      ng-show="$index > assessment.ratings.length - 3  || showOlderRatings">
-      <label>Rating from {{rating.ratedAt | dateFormat}}</label>
-      &nbsp;<a href="javascript:void(0)" ng-click="removeRating(assessment, $index)">Remove this rating</a>
-      <table>
-        <thead>
-        <tr>
-          <td>Skill</td>
-          <td>Rating</td>
-        </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="(key, value) in rating.scores">
-            <td>
-              <p class="form-control-static">{{key}}</p>
-            </td>
-            <td>
-              <input type="number" class="form-control"
-                placeholder="1-5" ng-model="rating.scores[key]"
-                ng-required="key"
-                min="1" max="5">
-            </td>
-            <td>
-              <button ng-click="removeSkill(rating.scores, key)" class="btn btn-default">Remove this skill</button>
-            </td>
+    <div ng-repeat="assessment in person.assessments" class="well">
+      <h4>Your {{assessment.category}} Ratings</h4>
+      <div class="form-group">
+        <label for="category{{$index}}">Category name</label>
+        <a href="javascript:void(0)" ng-click="removeAssessment(person, $index)" class="pull-right">Remove this category</a>
+        <input type="text" class="form-control" id="category{{$index}}" name="category{{$index}}"
+          placeholder="What are you learning about?"
+          ng-model="assessment.category" required="required" ng-trim="true">
+      </div>
+      <div class="form-group">
+        <a href="javascript:void(0)"
+            ng-click="showOlderRatings = !showOlderRatings"
+            ng-show="assessment.ratings.length > 2">
+          {{showOlderRatings ? '- Hide': '+ Show'}} older ratings
+        </a>
+      </div>
+      <div class="form-group" ng-repeat="rating in assessment.ratings"
+        ng-show="$index > assessment.ratings.length - 3  || showOlderRatings">
+        <label>Rating from {{rating.ratedAt | dateFormat}}</label>
+        &nbsp;<a href="javascript:void(0)" ng-click="removeRating(assessment, $index)">Remove this rating</a>
+        <table>
+          <thead>
+          <tr>
+            <td>Skill</td>
+            <td>Rating</td>
           </tr>
-          <tr class="form-inline">
-            <td class="form-group">
-              <input type="text" class="form-control" name="newSkillName"
-                placeholder="New skill" ng-model="newRating.key" ng-required="newRating.value">
-            </td>
-            <td class="form-group">
-              <input type="number" class="form-control" name="newSkillScore"
-                placeholder="1-5" ng-model="newRating.value" ng-required="newRating.key"
-                min="1" max="5">
-            </td>
-            <td>
-              <button ng-click="addSkill(rating.scores, newRating)" class="btn btn-default">Add this skill</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <tr ng-repeat="(key, value) in rating.scores">
+              <td>
+                <p class="form-control-static">{{key}}</p>
+              </td>
+              <td>
+                <input type="number" class="form-control"
+                  placeholder="1-5" ng-model="rating.scores[key]"
+                  ng-required="key"
+                  min="1" max="5">
+              </td>
+              <td>
+                <button ng-click="removeSkill(rating.scores, key)" class="btn btn-default">Remove this skill</button>
+              </td>
+            </tr>
+            <tr class="form-inline">
+              <td class="form-group">
+                <input type="text" class="form-control" name="newSkillName"
+                  placeholder="New skill" ng-model="newRating.key" ng-required="newRating.value">
+              </td>
+              <td class="form-group">
+                <input type="number" class="form-control" name="newSkillScore"
+                  placeholder="1-5" ng-model="newRating.value" ng-required="newRating.key"
+                  min="1" max="5">
+              </td>
+              <td>
+                <button ng-click="addSkill(rating.scores, newRating)" class="btn btn-default">Add this skill</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="form-group">
+        <button ng-click="addRating(assessment)" class="btn btn-primary">
+          <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Add new {{assessment.category}} ratings
+        </button>
+      </div>
     </div>
+
     <div class="form-group">
-      <button ng-click="addRating(assessment)" class="btn btn-primary">
-        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Add new {{assessment.category}} ratings
+      <button ng-click="addAssessment(person)" class="btn btn-info">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a new category of skills to track
       </button>
     </div>
-  </div>
 
-  <div class="form-group">
-    <button ng-click="addAssessment(person)" class="btn btn-info">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a new category of skills to track
-    </button>
-  </div>
-
-  <p class="save-all well">
-    <button ng-click="save(person)" class="btn btn-success" ng-disabled="editForm.$invalid || saving">Save all</button>
-    <button ng-click="discardChanges()" class="btn btn-default">Discard changes</button>
-    <span ng-show="editForm.$invalid" class="error-text">Looks like you have some missing or invalid fields</span>
-    &nbsp;<span ng-show="saving"><img src="assets/images/ajax-loader.gif"/> Saving</span>
-  </p>
-</form>
+    <p class="save-all well">
+      <button ng-click="save(person)" class="btn btn-success" ng-disabled="editForm.$invalid || saving">Save all</button>
+      <button ng-click="discardChanges()" class="btn btn-default">Discard changes</button>
+      <span ng-show="editForm.$invalid" class="error-text">Looks like you have some missing or invalid fields</span>
+      &nbsp;<span ng-show="saving"><img src="assets/images/ajax-loader.gif"/> Saving</span>
+    </p>
+  </form>
+</div>
