@@ -9,15 +9,16 @@ describe('Person', function () {
     require.and.returnValue(fs);
   });
 
-  beforeEach(inject(function($httpBackend, Person, $rootScope){
+  beforeEach(inject(function($httpBackend, Person, $rootScope, Config) {
     person = Person;
     httpBackend = $httpBackend;
     rootScope = $rootScope;
+    Config.apiUrl = 'apiUrl';
   }));
 
   it('should get person over http and return promise', function () {
     var result = {someKey: 'value', uid: 'uid'};
-    httpBackend.expectGET('http://blip-api.herokuapp.com/person').respond(200, result);
+    httpBackend.expectGET('apiUrl/person').respond(200, result);
     var callback = jasmine.createSpy('callback');
 
     person.get().then(callback);
@@ -30,7 +31,7 @@ describe('Person', function () {
 
   it('should return and set unauthenticated flag on root scope when no person is returned', function () {
     var result = {someKey: 'value'};
-    httpBackend.expectGET('http://blip-api.herokuapp.com/person').respond(200, result);
+    httpBackend.expectGET('apiUrl/person').respond(200, result);
     var callback = jasmine.createSpy('callback');
 
     person.get().then(callback);
@@ -44,7 +45,7 @@ describe('Person', function () {
 
   it('should save person over http', function () {
     var fred = { name: 'bob', assessments: ['an assessment'] };
-    httpBackend.expectPUT('http://blip-api.herokuapp.com/assessments', fred.assessments).respond(200, {});
+    httpBackend.expectPUT('apiUrl/assessments', fred.assessments).respond(200, {});
 
     person.save(fred);
 
@@ -54,7 +55,7 @@ describe('Person', function () {
   it('should return promise on save', function () {
     var fred = { assessments: [] };
     var response = {};
-    httpBackend.when('http://blip-api.herokuapp.com/assessments', fred.assessments).respond(200, response);
+    httpBackend.when('apiUrl/assessments', fred.assessments).respond(200, response);
 
     var promise = person.save(fred);
 

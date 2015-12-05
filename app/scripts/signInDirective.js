@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('blipApp')
-  .directive('signIn', function ($http, $rootScope, Person, $cookies) {
+  .directive('signIn', function ($http, $rootScope, Person, $cookies, Config) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/sign-in.html',
       controller: function ($scope) {
         $scope.signIn = function (provider) {
-          var authUrl = 'http://blip-api.herokuapp.com/auth/' + provider;
+          var authUrl = Config.apiUrl + '/auth/' + provider;
           $rootScope.authenticating = true;
           $http.get(authUrl).then(function (result) {
             var remote = require('remote');

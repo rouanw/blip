@@ -10,7 +10,10 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch'
-  ])
+    ])
+  .constant('Config', {
+    apiUrl: 'http://blip-api.herokuapp.com'
+  })
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('blipApp')
-  .factory('Person', function ($http, $q, $rootScope) {
+  .factory('Person', function ($http, $q, $rootScope, Config) {
     return {
       get: function () {
-        return $http({url: 'http://blip-api.herokuapp.com/person', method: 'GET', withCredentials: true}).then(function (result) {
+        return $http({url: Config.apiUrl + '/person', method: 'GET', withCredentials: true}).then(function (result) {
           if (result.data.uid) {
             return result.data;
           }
@@ -14,7 +14,7 @@ angular.module('blipApp')
       },
       save: function (person) {
         return $http({
-          url: 'http://blip-api.herokuapp.com/assessments',
+          url: Config.apiUrl + '/assessments',
           method: 'PUT',
           withCredentials: true,
           data: person.assessments

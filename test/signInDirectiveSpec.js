@@ -11,12 +11,13 @@ describe('Sign in directive', function() {
   beforeEach(module('blipApp'));
   beforeEach(module('scripts/sign-in.html'));
 
-  beforeEach(inject(function(_$compile_, _$rootScope_, $httpBackend, _$q_, _$cookies_) {
+  beforeEach(inject(function(_$compile_, _$rootScope_, $httpBackend, _$q_, _$cookies_, Config) {
     $compile = _$compile_;
     $rootScope = _$rootScope_;
     httpBackend = $httpBackend;
     $q = _$q_;
     $cookies = _$cookies_;
+    Config.apiUrl = 'apiUrl';
     element = $compile('<sign-in></sign-in>')($rootScope);
     $rootScope.$digest();
     var remote = jasmine.createSpyObj('remote', ['require']);
@@ -40,20 +41,20 @@ describe('Sign in directive', function() {
   describe('sign in', function () {
 
     it('calls to authenticate with provider when sign in is clicked', function() {
-      httpBackend.expectGET('http://blip-api.herokuapp.com/auth/twitter').respond(200, {});
+      httpBackend.expectGET('apiUrl/auth/twitter').respond(200, {});
       $rootScope.signIn('twitter')
       httpBackend.flush();
     });
 
     it('calls to authenticate with provider when sign in is clicked', function() {
-      httpBackend.expectGET('http://blip-api.herokuapp.com/auth/blah').respond(200, {});
+      httpBackend.expectGET('apiUrl/auth/blah').respond(200, {});
       $rootScope.signIn('blah')
       httpBackend.flush();
     });
 
     describe('when the response is received', function () {
       beforeEach(function () {
-        httpBackend.expectGET('http://blip-api.herokuapp.com/auth/twitter').respond(200, $q.when({}));
+        httpBackend.expectGET('apiUrl/auth/twitter').respond(200, $q.when({}));
       });
 
       it('should set authenticating to true', function () {
@@ -71,7 +72,7 @@ describe('Sign in directive', function() {
       it('should open a new window for the user to authenticate in', function () {
         $rootScope.signIn('twitter');
         httpBackend.flush();
-        expect(authWindow.loadUrl).toHaveBeenCalledWith('http://blip-api.herokuapp.com/auth/twitter');
+        expect(authWindow.loadUrl).toHaveBeenCalledWith('apiUrl/auth/twitter');
       });
 
       it('should register a callback for when the authWindow is closed', function () {
