@@ -26,6 +26,7 @@
     <div class="form-group" ng-repeat="rating in assessment.ratings"
       ng-show="$index > assessment.ratings.length - 3  || showOlderRatings">
       <label>Rating from {{rating.ratedAt | dateFormat}}</label>
+      &nbsp;<a href="javascript:void(0)" ng-click="removeRating(assessment, $index)">Remove this rating</a>
       <table>
         <thead>
         <tr>

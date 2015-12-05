@@ -132,6 +132,40 @@ describe('Edit person directive', function() {
     });
   });
 
+  describe('remove rating', function () {
+    beforeEach(function () {
+      spyOn(person, 'get').and.returnValue($q.when(adaLovelace));
+      $compile('<edit-person></edit-person>')($rootScope);
+      $rootScope.$digest();
+    });
+
+    it('should remove assessment from person', function () {
+      var assessment = {
+        "category": "Photography",
+        "ratings": [
+          {
+            "ratedAt": "2015-12-03T16:44:20+02:00",
+            "scores":
+            {
+              "Editing": 1,
+              "Clicking": 3
+            }
+          },
+          {
+            "scores":
+            {
+              "Editing": 1,
+              "Clicking": 3
+            }
+          }
+        ]
+      };
+      $rootScope.removeRating(assessment, 0);
+      expect(assessment.ratings.length).toBe(1);
+      expect(assessment.ratings.length.ratedAt).not.toBe("2015-12-03T16:44:20+02:00");
+    });
+  });
+
   describe('add skill', function () {
 
     beforeEach(function () {

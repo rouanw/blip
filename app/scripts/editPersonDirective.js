@@ -33,6 +33,9 @@ angular.module('blipApp')
             scores: scores
           });
         };
+        $scope.removeRating = function (assessment, index) {
+          assessment.ratings.splice(index, 1);
+        };
         $scope.addSkill = function (ratings, newRating) {
           ratings[newRating.key] = newRating.value;
           newRating.key = undefined;
