@@ -54,7 +54,9 @@
             <tr class="form-inline">
               <td class="form-group">
                 <input type="text" class="form-control" name="newSkillName"
-                  placeholder="New skill" ng-model="newRating.key" ng-required="newRating.value">
+                  placeholder="New skill" ng-model="newRating.key"
+                  ng-required="newRating.value"
+                  ng-pattern="'[A-Za-z]+'">
               </td>
               <td class="form-group">
                 <input type="number" class="form-control" name="newSkillScore"
