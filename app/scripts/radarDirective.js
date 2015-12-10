@@ -2,6 +2,17 @@
 
 angular.module('blipApp')
   .directive('radar', function () {
+    var createDataSet = function (scores, solidColor, transparentColor) {
+      return {
+        data: _.values(scores),
+        fillColor: transparentColor,
+        strokeColor: solidColor,
+        pointColor: solidColor,
+        pointStrokeColor: '#fff',
+        pointHighlightFill: '#fff',
+        pointHighlightStroke: solidColor
+      };
+    };
     return {
       restrict: 'A',
       scope: {
@@ -10,36 +21,16 @@ angular.module('blipApp')
       link: function (scope, elem) {
         var datasets = [];
 
-        var latestRatingIndex = scope.assessment.ratings.length - 1;
-        var latestRating = scope.assessment.ratings[latestRatingIndex].scores;
-        var latestDataset = {
-          data: _.values(latestRating),
-          fillColor: 'rgba(151,187,205,0.2)',
-          strokeColor: 'rgba(151,187,205,1)',
-          pointColor: 'rgba(151,187,205,1)',
-          pointStrokeColor: '#fff',
-          pointHighlightFill: '#fff',
-          pointHighlightStroke: 'rgba(151,187,205,1)'
-        };
-        datasets.push(latestDataset);
+        var latestScores = scope.assessment.ratings[scope.assessment.ratings.length - 1].scores;
+        datasets.push(createDataSet(latestScores, 'rgba(151,187,205,1)', 'rgba(151,187,205,0.2)'));
 
-        var previousRatingIndex = scope.assessment.ratings.length - 2;
-        if (previousRatingIndex >= 0) {
-          var previousRating = scope.assessment.ratings[previousRatingIndex].scores;
-          var previousDataset = {
-            data: _.values(previousRating),
-            fillColor: 'rgba(220,220,220,0.2)',
-            strokeColor: 'rgba(220,220,220,1)',
-            pointColor: 'rgba(220,220,220,1)',
-            pointStrokeColor: '#fff',
-            pointHighlightFill: '#fff',
-            pointHighlightStroke: 'rgba(220,220,220,1)'
-          };
-          datasets.push(previousDataset);
+        if (scope.assessment.ratings.length > 1) {
+          var previousScores = scope.assessment.ratings[scope.assessment.ratings.length - 2].scores;
+          datasets.push(createDataSet(previousScores, 'rgba(220,220,220,1)', 'rgba(220,220,220,0.2)'));
         }
 
         var chartContent = {
-          labels: Object.keys(latestRating),
+          labels: Object.keys(latestScores),
           datasets: datasets
         };
 
