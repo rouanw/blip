@@ -60,7 +60,33 @@ describe('Radar chart directive', function() {
       }));
     });
 
-    it('should add formatting metadata', function() {
+    it('should also add the previous ratings', function() {
+      var element = $compile('<canvas radar assessment="assessment"></canvas>')($rootScope);
+      $rootScope.$digest();
+      expect(contextSpy.Radar.calls.argsFor(0)[0].datasets[1]).toEqual(jasmine.objectContaining({
+        data: [1, 1, 4, 2]
+      }));
+    });
+
+    it('should not try to add a previous rating if there is only one', function() {
+      $rootScope.assessment = {
+        'ratings' : [
+          {
+            scores: {
+              'Grunt': 1,
+              'Node': 1,
+              'Angular': 4,
+              'CSS': 2
+            },
+          }
+        ]
+      };
+      var element = $compile('<canvas radar assessment="assessment"></canvas>')($rootScope);
+      $rootScope.$digest();
+      expect(contextSpy.Radar.calls.argsFor(0)[0].datasets.length).toBe(1);
+    });
+
+    it('should add formatting metadata for latest rating', function() {
       var element = $compile('<canvas radar assessment="assessment"></canvas>')($rootScope);
       $rootScope.$digest();
       expect(contextSpy.Radar.calls.argsFor(0)[0].datasets[0]).toEqual(jasmine.objectContaining({
@@ -70,6 +96,19 @@ describe('Radar chart directive', function() {
         pointStrokeColor: '#fff',
         pointHighlightFill: '#fff',
         pointHighlightStroke: 'rgba(151,187,205,1)'
+      }));
+    });
+
+    it('should add formatting metadata for previous rating', function() {
+      var element = $compile('<canvas radar assessment="assessment"></canvas>')($rootScope);
+      $rootScope.$digest();
+      expect(contextSpy.Radar.calls.argsFor(0)[0].datasets[1]).toEqual(jasmine.objectContaining({
+        fillColor: 'rgba(220,220,220,0.2)',
+        strokeColor: 'rgba(220,220,220,1)',
+        pointColor: 'rgba(220,220,220,1)',
+        pointStrokeColor: '#fff',
+        pointHighlightFill: '#fff',
+        pointHighlightStroke: 'rgba(220,220,220,1)'
       }));
     });
   });
