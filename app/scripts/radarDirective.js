@@ -26,7 +26,9 @@ angular.module('blipApp')
 
         if (scope.assessment.ratings.length > 1) {
           var previousScores = scope.assessment.ratings[scope.assessment.ratings.length - 2].scores;
-          datasets.push(createDataSet(previousScores, 'rgba(220,220,220,1)', 'rgba(220,220,220,0.2)'));
+          if (_.isEqual(_.sortBy(_.keys(previousScores)), _.sortBy(_.keys(latestScores)))) {
+            datasets.push(createDataSet(previousScores, 'rgba(220,220,220,1)', 'rgba(220,220,220,0.2)'));
+          }
         }
 
         var chartContent = {

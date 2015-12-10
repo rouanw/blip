@@ -86,6 +86,58 @@ describe('Radar chart directive', function() {
       expect(contextSpy.Radar.calls.argsFor(0)[0].datasets.length).toBe(1);
     });
 
+    it('should not try to add a previous rating if the two most recent ratings track different skills', function() {
+      $rootScope.assessment = {
+        'ratings' : [
+          {
+            scores: {
+              'Grunt': 1,
+              'Node': 1,
+              'Angular': 4,
+              'CSS': 2
+            },
+          },
+          {
+            scores: {
+              'French fries': 1,
+              'Node': 1,
+              'Angular': 4,
+              'CSS': 2
+            },
+          }
+        ]
+      };
+      var element = $compile('<canvas radar assessment="assessment"></canvas>')($rootScope);
+      $rootScope.$digest();
+      expect(contextSpy.Radar.calls.argsFor(0)[0].datasets.length).toBe(1);
+    });
+
+    it('should add a previous rating if the two most recent ratings track the same skills, in a different order', function() {
+      $rootScope.assessment = {
+        'ratings' : [
+          {
+            scores: {
+              'Grunt': 1,
+              'Node': 1,
+              'Angular': 4,
+              'CSS': 2
+            },
+          },
+          {
+            scores: {
+              'Grunt': 1,
+              'Angular': 1,
+              'Node': 4,
+              'CSS': 2
+            },
+          }
+        ]
+      };
+      var element = $compile('<canvas radar assessment="assessment"></canvas>')($rootScope);
+      $rootScope.$digest();
+      expect(contextSpy.Radar.calls.argsFor(0)[0].datasets.length).toBe(2);
+    });
+
     it('should add formatting metadata for latest rating', function() {
       var element = $compile('<canvas radar assessment="assessment"></canvas>')($rootScope);
       $rootScope.$digest();
