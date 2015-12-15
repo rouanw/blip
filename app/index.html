@@ -40,7 +40,10 @@
       <span class="label label-info">5</span>
       <span class="label label-primary">Has become second nature</span>
       <hr />
-      <div ng-view=""></div>
+
+      <sign-in ng-if="$root.unauthenticated"></sign-in>
+      <div ng-view="" ng-if="!$root.unauthenticated"></div>
+
     </div>
 
     <div class="overlay" ng-show="$root.authenticating"></div>
